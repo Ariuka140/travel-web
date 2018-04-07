@@ -2,8 +2,11 @@
   <div class="app">
    
     <LeftSide/>
-    <RightSide/>
-    <router-view></router-view>
+    <div id="right-panel" class="right-panel" style="width:calc(100% - 280px)">
+    	<RightSide/>
+    	<router-view></router-view>
+    </div>
+    
 
   </div>
 </template>

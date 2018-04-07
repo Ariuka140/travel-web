@@ -11,7 +11,35 @@
                                 <strong>Masked Input</strong> <small> Small Text Mask</small>
                             </div>
                             <div class="card-body card-block">
-                                <div class="form-group">
+                              <form @submit.prevent="insert">
+                              <div class="form-group">
+                                 <label class=" form-control-label">Title</label>                               
+                                 <div class="input-group">
+                                   <input name="name" v-model="title"/>
+                                 </div>
+                               </div>  
+                               <div class="form-group">
+                                 <label class=" form-control-label">Description</label>                               
+                                 <div class="input-group">
+                                   <input name="description" v-model="description"/>
+                                 </div>
+                               </div>  
+                               <div class="form-group">
+                                 <label class="form-control-label">Duration</label>                               
+                                 <div class="input-group">
+                                   <textarea name="duration" v-model="duration"/>
+                                 </div>
+                               </div>  
+                               <button type="submit" class="btn btn-info" style="float:right;">Илгээх</button>
+                             </form>
+                             </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                               <!-- <div class="form-group">
                                     <label class=" form-control-label">Date input</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
@@ -174,19 +202,29 @@
 
                     </div>
 
+-->
 
-
-                </div>
-
-
-            </div><!-- .animated -->
-
-
-    </div><!-- /#right-panel -->
-    
-    </template>
     <script>
+        import db from './../components/firebaseInit'
+        
         export default{
-            name:'addPackage'
+            name:'addPackage',
+            data(){
+              return{
+                package: [],
+                title:'',
+                description:'',
+                duration:''
+              }
+
+            },
+            methods:{
+              insert(){
+                console.log('hello')
+                db.collection('TravelPackage').add({Title: this.title,Description:this.description,Duration:this.duration}).catch(error => console.log(err))
+              }
+            }
+            
+            
         }
     </script>

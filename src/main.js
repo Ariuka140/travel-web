@@ -9,7 +9,7 @@ import router from './router'
  require('./assets/css/font-linearicons.css')
  require('./style.css')
  require('./assets/css/travel-setting.css')
-  require('./assets/scss/style.scss')
+ require('./assets/scss/style.scss')
  require('./images/favicon.png')
 
 Vue.config.productionTip = false
