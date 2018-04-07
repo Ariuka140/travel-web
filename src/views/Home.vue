@@ -24,6 +24,7 @@
 	                  </li>
 	                </ul>
 	              </div>
+								
 	            </aside>
 	            <aside id="travel_login_register_from-2" class="widget widget_login_form">
 	              <span class="show_from login"><i class="fa fa-user"></i>Login</span>
