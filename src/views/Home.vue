@@ -14,6 +14,7 @@
 	              </div>
 	            </aside>
 	          </div>
+						
 	          <div class="col-sm-8 topbar-right">
 	            <aside id="text-7" class="widget widget_text">
 	              <div class="textwidget">
