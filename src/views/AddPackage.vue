@@ -20,16 +20,16 @@
                         </button>
                     </div>
                     <div class="modal-body mx-3">
-                        <form>
+                        <form v-on:submit="insert">
                         <div class="md-form mb-5">
                             <i class="fa fa-tag prefix grey-text"></i>
-                            <input type="text" id="form34" class="form-control validate">
+                            <input type="text" id="form34" class="form-control validate" v-model="title">
                             <label data-error="wrong" data-success="right" for="form34">Title</label>
                         </div>
                         <div class="row">
                             <div class="md-form col-md-11">
                                 <i class="fa fa-calendar prefix grey-text"></i>                           
-                                    <input type="text" id="form29"  class="form-control validate">
+                                    <input type="number" id="form29"  class="form-control validate" v-model="duration">
                                     
                                 <label data-error="wrong" data-success="right" style="margin-left: 4.3rem;" for="form29">Duration</label>
                             </div>
@@ -43,19 +43,30 @@
 
                         <div class="md-form">
                             <i class="fa fa-info-circle prefix grey-text"></i>
-                            <textarea type="text" id="form8" class="md-textarea form-control"></textarea>
+                            <textarea type="text" id="form8" class="md-textarea form-control" v-model="description"></textarea>
                             <label data-error="wrong" data-success="right" for="form8">Description</label>
                         </div>
                          <div class="md-form">
-                            <i class="fa fa-upload prefix grey-text"></i>                            
-                            <input type="file" id="imageUp" class="file-field form-control" style="border:none;box-shadow:none">                    
                             
+                            <div class="row">  
+                                <div class="col-md-1">
+                                    <i class="fa fa-upload prefix grey-text"></i>   
+                                </div>                                
+                                <div class="col-md-8 controls" style="padding-left:0px">
+                                    <div class="entry input-group">                                          
+                                        <input type="file" multiple accept=".jpg,.png" id="image" class="file-field form-control"  v-on:change="detectFiles" style="border:none;box-shadow:none;width:74%;padding-top: 3px;">                    
+                                        <span>
+                                            <button type="button" v-on:click="addImage" class="btn cyan btn-rounded fileBtn"><i class="fa fa-plus pr-2" aria-hidden="true"></i></button>                                                                                                                        
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         </form>
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
-                        <button class="btn btn-info" type="submit" > <i class="fa fa-upload" style="margin-right:5px"></i>Insert</button>
+                        <button class="btn btn-info" type="submit"> <i class="fa fa-upload" style="margin-right:5px"></i>Insert</button>
                     </div>
                 </div>
             </div>
@@ -90,6 +101,18 @@
     .btn .fa {
         font-size: 1.3rem;
     }
+    .fileBtn{
+        border-radius: 50%;
+        padding: 1px 5px!important;
+        padding-bottom: 0px!important;
+        border-width: 0.5px!important;
+    }
+    .cancelBtn{        
+        border-radius: 50%;
+        padding: 1px 5px!important;
+        padding-bottom: 0px!important;
+        border-width: 0.5px!important;    
+    }
 
 </style>
 
@@ -102,22 +125,48 @@
         name:'addPackage',
         data(){
             return{
-            package: [],
+            package: [],           
             title:'',
             description:'',
-            duration:''
+            duration:'', 
+            selectedFile:FileList           
             }
 
-        },
+        },        
         methods:{
-            insert(){
-            console.log('hello')
-            db.collection('TravelPackage').add({Title: this.title,Description:this.description,Duration:this.duration})
-            .then( toastr["info"]("Success added!"))
-            .catch(error => console.log(error))
-            }
-        }
-        
-        
+            insert(){                
+                console.log('hello')
+                db.collection('Travel').add({Title: this.title,Description:this.description,Duration:this.duration,collection:this.selectedFile})
+                .then( toastr["info"]("Success added!"))
+                .catch(error => console.log(error))
+            },
+            addImage(event){
+                $(document).on('click', '.fileBtn', function(e)
+                {
+                    e.preventDefault();
+                    var controlForm = $('.controls:first'),
+                        currentEntry = $(this).parents('.entry:first'),
+                        newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+                    newEntry.find('input').val('');
+                    controlForm.find('.entry:not(:last) .fileBtn')
+                        .removeClass('fileBtn').addClass('cancelBtn')
+                        .removeClass('cyan').addClass('orange')                         
+                        .html('<i class="fa fa-minus pr-2" aria-hidden="true"></i>');
+                }).on('click', '.cancelBtn', function(e)
+                {
+                    $(this).parents('.entry:first').remove();
+
+                    e.preventDefault();
+                    return false;
+                });
+                },
+                detectFiles(event){
+                    this.selectedFile=event.target.file;                 
+                }
+            },
+            
+                    
+                    
     }
 </script>
