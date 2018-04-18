@@ -9,7 +9,7 @@ import addPackage from './../views/addPackage'
 Vue.use(Router) 
 
 export default new Router({
-  mode: 'hash', // Demo is living in GitHub.io, so required!
+  mode: 'history', // Demo is living in GitHub.io, so required!
   linkActiveClass: 'open active',
   scrollBehavior: () => ({ y: 0 }),
   routes: [

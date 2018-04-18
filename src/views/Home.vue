@@ -821,7 +821,7 @@
 	                <div class="tours-type-slider" data-autoplay="true" data-dots="true" data-nav="false" data-responsive='{"0":{"items":1}, "480":{"items":1}, "768":{"items":1}, "992":{"items":1}, "1200":{"items":1}}'>
 	                  <div class="tour-reviews-item">
 	                    <div class="reviews-item-info">
-	                      <img alt="" ../="./../images/avata.jpg" class="avatar avatar-95 photo" height="90" width="90">
+	                      <img alt="./../images/avata.jpg" class="avatar avatar-95 photo" height="90" width="90">
 	                      <div class="reviews-item-info-name">Jessica</div>
 	                      <div class="reviews-item-rating">
 	                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>

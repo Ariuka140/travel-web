@@ -1,8 +1,6 @@
 <template>
   <div class="app">
-   
-    <LeftSide/>
-    <div id="right-panel" class="right-panel" style="width:calc(100% - 280px)">
+    <div id="right-panel" class="right-panel">
     	<RightSide/>
     	<router-view></router-view>
     </div>
@@ -12,12 +10,11 @@
 </template>
 
 <script>
-import LeftSide from './../components/LeftSide.vue'
+
 import RightSide from './../components/RightSide.vue'
 export default {
   name: 'full',
-  components: {
-      LeftSide,
+  components: {      
       RightSide
   },
 
@@ -25,7 +22,7 @@ export default {
 </script>
 <style>
 	.app{
-		background: $container-bg;
+		background: container-bg;
 		display: table;
 		font-family: 'Open Sans' sans-serif !important;
 		font-size: 16px;
