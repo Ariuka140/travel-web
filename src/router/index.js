@@ -6,6 +6,9 @@ import full from './../containers/Full'
 
 import Home from './../views/Home'
 import addPackage from './../views/addPackage'
+import adminDashboard from './../views/adminDashboard'
+
+
 Vue.use(Router) 
 
 export default new Router({
@@ -20,13 +23,18 @@ export default new Router({
     },{
      path: '/admin',      
      name: 'Admin',
-     redirect:'/admin/addPackage',
+     redirect:'/admin/adminDashboard',
      component: full,
      children:[
         {          
           path:'addPackage',
           name:'addPackage',
           component:addPackage          
+        },
+        {          
+          path:'adminDashboard',
+          name:'adminDashboard',
+          component:adminDashboard          
         }
       ]
     }
