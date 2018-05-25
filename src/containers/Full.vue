@@ -1,7 +1,15 @@
 <template>
   <div class="app">
-    <div id="right-panel" class="right-panel">
-    	<RightSide/>
+      <header class="newHeader">
+        <button type="button" class="sidebar-toggle-box" @click="toggleLeft()">          
+          <div class="fa fa-bars"></div>
+        </button>
+      </header>
+     <div id="left-panel" class="leftPanel">
+       <LeftSide/>
+     </div>
+      <div id="right-panel" class="right-panel">
+    
     	<router-view></router-view>
     </div>
     
@@ -10,15 +18,22 @@
 </template>
 
 <script>
-
-import RightSide from './../components/RightSide.vue'
+import LeftSide from './../components/LeftSide.vue'
 export default {
   name: 'full',
   components: {      
-      RightSide
+      
+      LeftSide
   },
+  methods:{
+    toggleLeft(){
+
+      $('#left-panel').animate({width: 'toggle'});
+    }
+  }
 
 }
+
 </script>
 <style>
 	.app{

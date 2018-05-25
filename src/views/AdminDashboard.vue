@@ -1,11 +1,10 @@
  <template>
     <div class="content container mt-3" style="width:1100px;float:none">        
-        <div class="text-center" >
-             <div class="wrapper-tours-slider wrapper-tours-type-slider">
-	            <div class="tours-type-slider list_content" data-dots="true" data-nav="true"  data-responsive='{"0":{"items":1}, "480":{"items":2}, "768":{"items":2}, "992":{"items":3}, "1200":{"items":4}}'>
-	              <div class="item-tour">
+        <div class="text-center" style="display:grid">
+              <div class="wrapper-tours-slider wrapper-tours-type-slider">
+	            <div class="tours-type-slider" data-dots="true" data-nav="true" data-responsive='{"0":{"items":1}, "480":{"items":2}, "768":{"items":3}, "992":{"items":4}, "1200":{"items":5}}'><div class="item-tour" v-for="travel in travels" v-bind:key="travel.id">
 	                <div class="item_border">
-	                  <div class="item_content" v-for="travel in travels" v-bind:key="travel.id">
+	                  <div class="item_content" >
 	                    <div class="post_images">
 	                      <router-link to="/admin/addPackage">
 	                      <span class="price">
@@ -35,11 +34,13 @@
 	                    <div class="clear"></div>
 	                  </div>
 	                </div>
-	              </div>	          
+	              </div>		             								        
 	            </div>
 	          </div>
-            <router-link to="/admin/addPackage" class="btn btn-default btn-rounded mb-4">Add travel</router-link>
-        </div>
+						<div>
+            	<router-link to="/admin/addPackage" class="btn btn-default btn-rounded mb-4">Add travel</router-link>
+						</div>
+				</div>
     </div>
 </template> 
 <style>
@@ -48,6 +49,14 @@
     }
 </style>  
 <script>
+	import jquery from './../assets/js/jquery.min.js'
+	import bootstrap from './../assets/js/bootstrap.min.js'
+	import owl from './../assets/js/owl.carousel.min.js'
+	import comingsoon from './../assets/js/jquery.mb-comingsoon.min.js'
+	import waypoints from './../assets/js/waypoints.min.js'
+	import counter from './../assets/js/jquery.counterup.min.js'
+	import theme from './../assets/js/theme.js'
+
     import db from './../components/firebaseInit'
     export default {
         name:'adminDashboard',      

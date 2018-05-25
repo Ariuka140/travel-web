@@ -7,8 +7,9 @@ import full from './../containers/Full'
 import Home from './../views/Home'
 import addPackage from './../views/addPackage'
 import adminDashboard from './../views/adminDashboard'
+import responsive from 'vue-responsive'
 
-
+Vue.use(responsive)
 Vue.use(Router) 
 
 export default new Router({
