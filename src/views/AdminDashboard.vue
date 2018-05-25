@@ -1,8 +1,12 @@
  <template>
-    <div class="content container mt-3" style="width:1100px;float:none">        
-        <div class="text-center" style="display:grid">
-              <div class="wrapper-tours-slider wrapper-tours-type-slider">
-	            <div class="tours-type-slider" data-dots="true" data-nav="true" data-responsive='{"0":{"items":1}, "480":{"items":2}, "768":{"items":3}, "992":{"items":4}, "1200":{"items":5}}'><div class="item-tour" v-for="travel in travels" v-bind:key="travel.id">
+    <div class="content container mt-3" style="width:1100px;float:none">     
+				<div class="shortcode_title title-center title-decoration-bottom-center" style="margin-bottom:30px; margin-top:30px;">
+					<h3 class="title_primary">TRAVELS</h3><span class="line_after_title"></span>
+				</div>
+        <div class="text-center" style="padding:20px">
+            <div class="wrapper-tours-slider wrapper-tours-type-slider">
+	            <div class="tours-type-slider owl-carousel owl-theme"  data-dots="true" data-nav="true" data-responsive='{"0":{"items":1}, "480":{"items":2}, "768":{"items":3} , "1200":{"items":4}}'>
+								<div class="item-tour"  v-for="travel in travels" v-bind:key="travel.id">
 	                <div class="item_border">
 	                  <div class="item_content" >
 	                    <div class="post_images">
@@ -29,17 +33,14 @@
 	                    <div class="item_rating">
 	                      <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
 	                    </div>
-	                    <a href="single-tour.html" class="read_more_button">VIEW MORE
-	                      <i class="fa fa-long-arrow-right"></i></a>
+	                    <router-link to="/admin/addPackage" class="read_more_button">VIEW MORE
+	                      <i class="fa fa-long-arrow-right"></i></router-link>
 	                    <div class="clear"></div>
 	                  </div>
 	                </div>
 	              </div>		             								        
 	            </div>
-	          </div>
-						<div>
-            	<router-link to="/admin/addPackage" class="btn btn-default btn-rounded mb-4">Add travel</router-link>
-						</div>
+	          </div>					
 				</div>
     </div>
 </template> 
@@ -56,29 +57,86 @@
 	import waypoints from './../assets/js/waypoints.min.js'
 	import counter from './../assets/js/jquery.counterup.min.js'
 	import theme from './../assets/js/theme.js'
-
-    import db from './../components/firebaseInit'
-    export default {
-        name:'adminDashboard',      
-        data () {
-        return {
-            travels: [],  
-            title:'',
-            description:'',
-            duration:''          
-            }        
-        },
-        created () {
-            db.collection('travel').get().then((querySnapshot) => {                
-                querySnapshot.forEach((doc) => {
-                const data = {
-                    'title': doc.data().Title,
-                    'description': doc.data().Description,
-                    'duration': doc.data().Duration                   
-                }
-                this.travels.push(data)
-                })
-            })
-        }  
-    }
+	import Vue from 'vue'
+	import db from './../components/firebaseInit'		
+	export default {
+			name:'adminDashboard',      
+			data () {
+			return {
+					travels: [],  
+					title:'',
+					description:'',
+					duration:''          
+					}        
+			},
+			created () {
+					db.collection('travel').get().then((querySnapshot) => {                
+							querySnapshot.forEach((doc) => {
+							const data = {
+									'title': doc.data().Title,
+									'description': doc.data().Description,
+									'duration': doc.data().Duration                   
+							}
+							this.travels.push(data)
+							})
+					});					
+			},	
+			methods:{
+				loadCarousel:function(){
+					$('.owl-carousel').owlCarousel({
+						items: 5,
+						loop: true,
+						margin: 10,
+						autoplay: true,
+						autoplayTimeout: 500,
+						autoplayHoverPause: true,
+						responsiveClass: true,
+						responsive:{
+							0: {
+								items: 1,
+								nav: true
+							},
+							468: {
+								items: 2,
+								nav: true
+							},
+							768: {
+								items: 3,
+								nav: true
+							},
+							992: {
+								items: 4,
+								nav: true
+							},
+							1200: {
+								items: 5,
+								nav: true
+							}	
+						}
+						});
+				},
+				generateCarousel: function () {
+					if (jQuery().owlCarousel) {
+						jQuery(".wrapper-tours-slider").each(function () {
+							var $this = jQuery(this),
+								owl = $this.find('.tours-type-slider');
+							var config = owl.data();
+							config.slidespeed = 1000;
+							config.margin = 0;
+							config.loop = true;
+							config.navText = ['<i class="lnr lnr-chevron-left"></i>', '<i class="lnr lnr-chevron-right"></i>'];
+							owl.owlCarousel(config);
+						})
+					}
+				}	
+			
+			},
+			updated: function () {
+				var vm = this;
+				Vue.nextTick()
+					.then(function () {
+						vm.generateCarousel();
+					});
+				}
+		}
 </script>

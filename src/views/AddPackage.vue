@@ -1,67 +1,54 @@
 
-<template>      
-    <modal id="modalRegisterForm" tabindex="-1" class="fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Add travel</h4>
-                    <button  class="close" data-dismiss="modal" aria-label="Close" @click="$router.go(-1)">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+<template>     
+    <div class="content container mt-3" style="width:1100px;float:none">    
+          <form v-on:submit.prevent="insert" class="formStyle">
+                <div class="formLabel">
+                    <h4>Add travel</h4>
+                </div>         
+                <div class="md-form mb-5">
+                    <i class="fa fa-tag prefix grey-text"></i>
+                    <input type="text" id="form34" class="form-control validate" v-model="title">
+                    <label data-error="wrong" data-success="right" for="form34">Title</label>
                 </div>
-                <div class="modal-body mx-3">
-                    <form v-on:submit.prevent="insert">
-                    <div class="md-form mb-5">
-                        <i class="fa fa-tag prefix grey-text"></i>
-                        <input type="text" id="form34" class="form-control validate" v-model="title">
-                        <label data-error="wrong" data-success="right" for="form34">Title</label>
+                <div class="row">
+                    <div class="md-form col-md-11">
+                        <i class="fa fa-calendar prefix grey-text"></i>                           
+                            <input type="number" id="form29"  class="form-control validate" v-model="duration">
+                            
+                        <label data-error="wrong" data-success="right" style="margin-left: 4.3rem;" for="form29">Duration</label>
                     </div>
-                    <div class="row">
-                        <div class="md-form col-md-11">
-                            <i class="fa fa-calendar prefix grey-text"></i>                           
-                                <input type="number" id="form29"  class="form-control validate" v-model="duration">
-                                
-                            <label data-error="wrong" data-success="right" style="margin-left: 4.3rem;" for="form29">Duration</label>
-                        </div>
-                        <span class="col-1" style="padding-left: 0px;margin-top: 33px;display: block;" >days</span>
-                    </div>
-                    <div class="md-form mb-5">
-                        <i class="fa fa-info-circle prefix grey-text"></i>
-                        <input type="text" id="form32" class="form-control validate">
-                        <label data-error="wrong" data-success="right" for="form32"></label>
-                    </div>
+                    <span class="col-1" style="padding-left: 0px;margin-top: 33px;display: block;" >days</span>
+                </div>
+                <div class="md-form mb-5">
+                    <i class="fa fa-info-circle prefix grey-text"></i>
+                    <input type="text" id="form32" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form32"></label>
+                </div>
 
+                <div class="md-form">
+                    <i class="fa fa-info-circle prefix grey-text"></i>
+                    <textarea type="text" id="form8" class="md-textarea form-control" v-model="description"></textarea>
+                    <label data-error="wrong" data-success="right" for="form8">Description</label>
+                </div>
                     <div class="md-form">
-                        <i class="fa fa-info-circle prefix grey-text"></i>
-                        <textarea type="text" id="form8" class="md-textarea form-control" v-model="description"></textarea>
-                        <label data-error="wrong" data-success="right" for="form8">Description</label>
+                    
+                    <div class="row">  
+                        <div class="col-md-1">
+                            <i class="fa fa-upload prefix grey-text"></i>   
+                        </div>                                
+                        <div class="col-md-8 controls" style="padding-left:0px">
+                            <div class="entry input-group">                                          
+                                <input type="file" multiple accept=".jpg,.png" id="image" class="file-field form-control"  v-on:change="detectFiles" style="border:none;box-shadow:none;width:74%;padding-top: 3px;">                    
+                                <span>
+                                    <button type="button" v-on:click="addImage" class="btn cyan btn-rounded fileBtn"><i class="fa fa-plus pr-2" aria-hidden="true"></i></button>                                                                                                                        
+                                </span>
+            
+                                </div>
+                            </div> 
+                        </div>
                     </div>
-                        <div class="md-form">
-                        
-                        <div class="row">  
-                            <div class="col-md-1">
-                                <i class="fa fa-upload prefix grey-text"></i>   
-                            </div>                                
-                            <div class="col-md-8 controls" style="padding-left:0px">
-                                <div class="entry input-group">                                          
-                                    <input type="file" multiple accept=".jpg,.png" id="image" class="file-field form-control"  v-on:change="detectFiles" style="border:none;box-shadow:none;width:74%;padding-top: 3px;">                    
-                                    <span>
-                                        <button type="button" v-on:click="addImage" class="btn cyan btn-rounded fileBtn"><i class="fa fa-plus pr-2" aria-hidden="true"></i></button>                                                                                                                        
-                                    </span> 
-                
-                                    </div>
-                                </div> 
-                        </div>
-                        </div>
-                    </form>
-                </div>
-            </div></div>     
-            </modal>
-                 
-                   
-        
-
+                </form>
+    </div>
 </template>
 <style>
     .md-form label.active{
@@ -105,11 +92,11 @@
     import db from './../components/firebaseInit'
     import mdb from './../assets/js/mdb.min.js'
 
-    import * as axios from 'axios';
+    //import * as axios from 'axios';
 
     const BASE_URL = 'http://localhost:8080';
 
-    function upload(formData) {
+    /*function upload(formData) {
         const url = `${BASE_URL}/images/upload  `;
         return axios.post(url, formData)
             // get data
@@ -117,7 +104,7 @@
             // add url field
             .then(x => x.map(img => Object.assign({},
                 img, { url: `${BASE_URL}/images/${img.id}` })));
-    }
+    }*/
     export default{
         name:'addPackage',
         data(){

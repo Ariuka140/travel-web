@@ -4,12 +4,13 @@ import Router from 'vue-router'
 // Containers
 import full from './../containers/Full'
 
+import MainTemplate from './../containers/MainTemplate'
 import Home from './../views/Home'
 import addPackage from './../views/addPackage'
 import adminDashboard from './../views/adminDashboard'
-import responsive from 'vue-responsive'
+//import responsive from 'vue-responsive'
 
-Vue.use(responsive)
+//Vue.use(responsive)
 Vue.use(Router) 
 
 export default new Router({
@@ -19,8 +20,16 @@ export default new Router({
   routes: [
     {
       path: '/',      
-      name: 'Home',
-      component : Home      
+      name: 'MainTemplate',
+      component : MainTemplate,
+      redirect:'/Home' ,
+      children:[
+        {          
+          path:'',
+          name:'Home',
+          component:Home          
+        },
+      ]     
     },{
      path: '/admin',      
      name: 'Admin',

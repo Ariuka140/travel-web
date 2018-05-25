@@ -20,19 +20,90 @@
     border: none;
     background: none;
 }
-.left-panel nav{
+aside.left-panel nav{
     box-shadow: none;
 }
-.left-panel{
+aside.left-panel{
+    transition: unset!important;
     animation: slide 1s ease 3.5s forwards;
+}
+aside.left-panel{
+    padding: 0 15px!important;
+    width: 230px!important;
+}
+.wrapper-tours-slider .tours-type-slider .owl-nav .owl-prev i, 
+.wrapper-tours-slider .tours-type-slider .owl-nav .owl-next i{
+    font-size: 30px;
+}
+.wrapper-tours-slider.whitePointer .tours-type-slider .owl-nav .owl-prev, 
+.wrapper-tours-slider.whitePointer .tours-type-slider .owl-nav .owl-next{
+    color: #fff;
+}
+.wrapper-tours-slider .tours-type-slider .owl-nav .owl-prev{
+    left:-30px
+}
+.wrapper-tours-slider .tours-type-slider .owl-nav .owl-next{
+    right:-30px;
+}
+.adminHeader{
+    font-size: 12px;
+    font-weight: 700;
+    color: rgb(103, 107, 112);;
+    display: flex;
+    list-style: none;
+    float: right;
+    margin: 0px;
+    padding: 7px 0px;
+}
+.adminHeader li{
+    margin-right: 10px;
+}
+.navbar .menu-title{
+    line-height: 38px;
+    padding: 25px 0 0px 5px;
+}
+.content-slider .btn-slider:hover{
+    color:#ffb300!important;
 }
 @keyFrames slide {
   from {
       width: 0;
     }
-  to {width: 300px;
+  to {width: 230px;
     }
 }
 .right-panel{
     height: 100vh;
+    padding-top: 40px;
+}
+.navbar-nav a i.fa{
+    margin-right:0px;
+}
+.formLabel{
+    padding-left: 9px;
+    margin-bottom: 30px;
+    text-align: center;
+    }
+.read_more_button:before{
+    left: -1px}
+.navbar .navbar-nav li > a .menu-icon{
+    width: 35px;
+}
+.section-background{
+    background-image:url(./../images/khuvsgul_bg.jpg);
+}
+@media (max-width: 1368px){
+    .formStyle{
+        padding: 10px 42px;
+    }
+}
+@media (max-width: 1000px){
+    .formStyle{
+        padding: 10px 32px;
+    }
+}
+@media (max-width: 800px){
+    .formStyle{
+        padding: 10px 22px;
+    }
 }
