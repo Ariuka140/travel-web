@@ -8,7 +8,7 @@
 	        <div class="content-slider">
 	          <p>Find your special tour today </p>
 	          <h2>With Travel Tours </h2>
-	          <p><a href="tours.html" class="btn btn-slider">VIEW TOURS </a></p>
+	          <p><router-link to="/Tours" class="btn btn-slider">VIEW TOURS </router-link></p>
 	        </div>
 	      </div>
 
@@ -233,14 +233,7 @@
 	                <div class="stats_counter_title">Tour types</div>
 	              </div>
 	            </div>
-	          </div>
-	          <div class="row">
-	            <div class="col-sm-12 text-center padding-top-6x">
-	              <a href="https://themeforest.net/item/travel-html-tour-travel-html-template-for-travel-agency-and-tour-operator/19504894" class="icon-btn" title="Tour HTML Template - Travel HTML Template" target="_blank">
-	                <i class="flaticon-cart"></i> Purchase theme
-	              </a>
-	            </div>
-	          </div>
+	          </div>	       
 	        </div>
 	      </div>
 	      <!--<div class="section-white padding-top-6x padding-bottom-6x">
@@ -550,7 +543,7 @@
 							this.travels.push(data)
 							})
 					});					
-			},	
+			},
 			methods:{			
 				generateCarousel: function () {
 					if (jQuery().owlCarousel) {
@@ -566,7 +559,6 @@
 						})
 					}
 				}	
-			
 			},
 			updated: function () {
 				var vm = this;
@@ -575,5 +567,6 @@
 						vm.generateCarousel();
 					});
 				}
+			
 	}
 </script>

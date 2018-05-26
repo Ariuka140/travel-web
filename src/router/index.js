@@ -6,6 +6,8 @@ import full from './../containers/Full'
 
 import MainTemplate from './../containers/MainTemplate'
 import Home from './../views/Home'
+import Tours from './../views/Tours'
+import TourDetail from './../views/TourDetail'
 import addPackage from './../views/addPackage'
 import adminDashboard from './../views/adminDashboard'
 //import responsive from 'vue-responsive'
@@ -28,6 +30,16 @@ export default new Router({
           path:'',
           name:'Home',
           component:Home          
+        },
+        {          
+          path:'/Tours',
+          name:'Tours',
+          component:Tours          
+        },
+        {          
+          path:'/:id',
+          name:'TourDetail',
+          component:TourDetail          
         },
       ]     
     },{

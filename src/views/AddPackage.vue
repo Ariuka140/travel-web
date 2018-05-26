@@ -109,18 +109,26 @@
         name:'addPackage',
         data(){
             return{
-            package: [],           
+            package: [], 
+            ids:[],
+            id:'',          
             title:'',
             description:'',
             duration:'', 
             selectedFile:FileList           
             }
 
-        },        
-        methods:{
-            insert(){                
+        },              
+        methods:{            
+            insert(){ 
+                db.collection('travel').get().then((querySnapshot) => {                
+                    querySnapshot.forEach((doc) => {                    
+                    this.ids.push(doc.data().id);                                      
+                    });
+                });
+                id = Math.max.apply(Math,ids); 		              
                 console.log('hello')
-                db.collection("travel").doc("update").set({Title: this.title,Description:this.description,Duration:this.duration})
+                db.collection("travel").doc("update").set({Title: this.title,Description:this.description,Duration:this.duration,Id:this.id})
                 .then(function(event){
                     alert("success")                   
                     $('#modalRegisterForm').modal('hide')                        

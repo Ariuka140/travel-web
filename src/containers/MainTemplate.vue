@@ -1,8 +1,8 @@
 <template>    
 	<div class="transparent_home_page">
 	<div class="wrapper-container">
-	  <header id="masthead" class="site-header sticky_header affix-top" style="position:fixed">
-	    <div class="header_top_bar">
+	  <header id="masthead" class="site-header sticky_header affix-top">
+	    <div class="header_top_bar" style="position:fixed;width:100%;margin-bottom:30px">
 	      <div class="container">
 	        <div class="row">
 	          <div class="col-sm-4">
@@ -29,7 +29,7 @@
 	        </div>
 	      </div>
 	    </div>
-	    <div class="navigation-menu">
+	    <div class="navigation-menu" style="margin-top:30px;z-index:-1">
 	      <div class="container">
 	        <div class="menu-mobile-effect navbar-toggle button-collapse" data-activates="mobile-demo">
 	          <span class="icon-bar"></span>
@@ -44,44 +44,14 @@
 	        </div>
 	        <nav class="width-navigation">
 	          <ul class="nav navbar-nav menu-main-menu side-nav" id="mobile-demo">
-	            <li class="current-menu-ancestor current-menu-parent">
-	              <a href="index.html">Home</a>
-	              <ul class="sub-menu">
-	                <li><a href="index.html">Home 1 – Video Slider</a></li>
-	                <li><a href="home-2.html">Home 2 – Image Slider</a></li>
-	                <li><a href="home-3.html">Home 3 – Background Image</a></li>
-	                <li><a href="home-4.html">Home 4</a></li>
-	              </ul>
+	            <li>
+	              <a href="index.html">Home</a>	             
 	            </li>
-	            <li class="menu-item-has-children">
-	              <a href="tours.html">Tours</a>
-	              <ul class="sub-menu">
-	                <li><a href="single-tour.html">Single Tour</a></li>
-	                <li><a href="#">Layout</a>
-	                  <ul class="sub-menu">
-	                    <li><a href="tours-list.html">Tour List</a></li>
-	                    <li><a href="tours-2-cols.html">Grid – 2 cols</a></li>
-	                    <li><a href="tours.html">Grid – 3 cols(width sidebar)</a></li>
-	                    <li><a href="tours-3-cols.html">Grid – 3 cols (no sidebar)</a></li>
-	                    <li><a href="tours-4-cols.html">Grid – 4 cols</a></li>
-	                  </ul>
-	                </li>
-	              </ul>
+	            <li>
+	              <a href="tours.html">Tours</a>	             
 	            </li>
-
-	            <li><a href="destinations.html">Destinations</a></li>
-	            <li><a href="blog.html">Blog</a></li>
-
-	            <li class="menu-item-has-children">
-	              <a href="#">Pages</a>
-	              <ul class="sub-menu">
-
-
-	                <li><a href="gallery.html">Gallery</a></li>
-	                <li><a href="travel-tips.html">Travel Tips</a></li>
-	                <li><a href="typography.html">Typography</a></li>
-	                <li><a href="checkout.html">Checkout</a></li>
-	              </ul>
+							<li>
+	              <a href="tours.html">Destinations</a>	             
 	            </li>
 	            <li><a href="contact.html">Contact</a></li>
 	            <li class="menu-right">
@@ -229,22 +199,10 @@
 	
 	}
 </style>
-<script>
-	import jquery from './../assets/js/jquery.min.js'
-	import bootstrap from './../assets/js/bootstrap.min.js'
-	import owl from './../assets/js/owl.carousel.min.js'
-	import comingsoon from './../assets/js/jquery.mb-comingsoon.min.js'
-	import swipebox from './../assets/js/jquery.swipebox.min.js'
-	import waypoints from './../assets/js/waypoints.min.js'
-	import counter from './../assets/js/jquery.counterup.min.js'
-	import theme from './../assets/js/theme.js'
-	import Vue from 'vue'
-	import db from './../components/firebaseInit'	
-
-
+<script>	
 	export default {
-			name:'MainTemplate',  	  
-			
+			name:'MainTemplate', 									  
+							
 		}
 </script>
 

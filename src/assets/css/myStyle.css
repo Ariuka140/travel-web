@@ -65,6 +65,9 @@ aside.left-panel{
 .content-slider .btn-slider:hover{
     color:#ffb300!important;
 }
+.top_site_main{
+    background-image: url(./../images/banner/top-heading.jpg);
+}
 @keyFrames slide {
   from {
       width: 0;
