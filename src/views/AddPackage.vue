@@ -46,6 +46,10 @@
                                 </div>
                             </div> 
                         </div>
+                    </div>  
+                    <div class="md-form" style="text-align:center">                 
+                        <button type="submit" class="btn btn-default btn-rounded mb-4">
+                         <i class="fa fa-upload" style="margin-right:5px;"/>Insert</button>
                     </div>
                 </form>
     </div>
@@ -105,6 +109,7 @@
             .then(x => x.map(img => Object.assign({},
                 img, { url: `${BASE_URL}/images/${img.id}` })));
     }*/
+    var ids;
     export default{
         name:'addPackage',
         data(){
@@ -120,20 +125,29 @@
 
         },              
         methods:{            
-            insert(){ 
+            insert(){   
                 db.collection('travel').get().then((querySnapshot) => {                
-                    querySnapshot.forEach((doc) => {                    
-                    this.ids.push(doc.data().id);                                      
-                    });
-                });
-                id = Math.max.apply(Math,ids); 		              
-                console.log('hello')
-                db.collection("travel").doc("update").set({Title: this.title,Description:this.description,Duration:this.duration,Id:this.id})
-                .then(function(event){
-                    alert("success")                   
-                    $('#modalRegisterForm').modal('hide')                        
-                })               
-                .catch(error => console.log(error))
+                    querySnapshot.forEach((doc) => { 
+                        if(doc.data().Id)                   
+                            this.ids.push(doc.data().Id) 
+                        else
+                            this.ids.push(1)                                
+                    })       
+                })
+                if(this.id){
+                    db.collection('travel').doc(this.id).set({
+                        Title: this.title,
+                        Description:this.description,
+                        Duration:this.duration,
+                        Id:this.id                           
+                    })
+                    .then(function(event){
+                        alert("success")                   
+                        $('#modalRegisterForm').modal('hide')                        
+                    })               
+                    .catch(error => console.log(error))   
+                }
+                               
             },           
             addImage(event){
                 $(document).on('click', '.fileBtn', function(e)
