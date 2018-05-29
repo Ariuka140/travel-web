@@ -1,7 +1,7 @@
 
 <template>     
     <div class="content container mt-3" style="width:1100px;float:none">    
-          <form v-on:submit.prevent="insert" class="formStyle">
+          <form v-on:submit.prevent="update" class="formStyle">
                 <div class="formLabel">
                     <h4>Edit tour</h4>
                 </div>         
@@ -48,7 +48,7 @@
                     </div>  
                     <div class="md-form" style="text-align:center">                 
                         <button type="submit" class="btn btn-warning btn-rounded mb-4">
-                         <i class="fa fa-upload" style="margin-right:5px;"/>Insert</button>
+                         <i class="fa fa-upload" style="margin-right:5px;"/>Update</button>
                     </div>
                 </form>
     </div>
@@ -152,32 +152,23 @@
         '$route': 'fetchData'
         },	           
         methods:{            
-            insert(){
-                db.collection('travel').get().then((querySnapshot) => {                
-                    querySnapshot.forEach((doc) => { 
-                        debugger                       
-                        if(doc.data().Id)                   
-                            ids.push(doc.data().Id) 
-                        else
-                            ids.push(1)                                
-                    })
-                    this.id = Math.max.apply(null, ids) + 1;         
-                })
-                if(this.id){
-                    db.collection('travel').doc(this.id.toString()).set({
+            update(){
+                db.collection('travel').where('Id', '==', this.$route.params.id).get().then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        doc.ref.update({
+                        Id: this.id,
                         Title: this.title,
-                        Description:this.description,
-                        Duration:this.duration,
-                        Id:this.id,
-                        Type:this.type                           
+                        Duration: this.duration,
+                        Description: this.description,
+                        Type: this.typeId
+                        })
+                        .then(() => {
+                            alert("success") 
+                            this.$router.push({ name: 'TourDetail', params: { id: this.id }})
+                          
+                        });
                     })
-                    .then(function(event){
-                        alert("success")                   
-                        $('#modalRegisterForm').modal('hide')                        
-                    })               
-                    .catch(error => console.log(error))   
-                }
-                               
+                })            
             },                   
             addImage(event){
                 $(document).on('click', '.fileBtn', function(e)

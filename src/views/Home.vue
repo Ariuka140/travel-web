@@ -19,53 +19,19 @@
 	              <ul class="hb-form-table">
 	                <li class="hb-form-field">
 	                  <div class="hb-form-field-input hb_input_field">
-	                    <input type="text" name="name_tour" value="" placeholder="Tour name">
+	                    <input type="text" name="name_tour" value="" v-model="titleSearch" placeholder="Tour title">
 	                  </div>
 	                </li>
 	                <li class="hb-form-field">
 	                  <div class="hb-form-field-input hb_input_field">
-	                    <select name="tourtax[tour_phys]">
+	                    <select name="tourtax[tour_phys]" v-model="typeSearch">
 	                      <option value="0">Tour Type</option>
-	                      <option value="escorted-tour">Escorted Tour</option>
-	                      <option value="rail-tour">Rail Tour</option>
-	                      <option value="river-cruise">River Cruise</option>
-	                      <option value="tour-cruise">Tour &amp; Cruise</option>
-	                      <option value="wildlife">Wildlife</option>
+	                      <option v-for="tp in types" v-bind:value="tp.typeId">{{tp.typeName}}</option> 
 	                    </select>
 	                  </div>
-	                </li>
-	                <li class="hb-form-field">
-	                  <div class="hb-form-field-input hb_input_field">
-	                    <select name="tourtax[pa_destination]">
-	                      <option value="0">Destination</option>
-	                      <option value="china">Brazil</option>
-	                      <option value="canada">Canada</option>
-	                      <option value="cuba">Cuba</option>
-	                      <option value="italy">Italy</option>
-	                      <option value="philippines">Philippines</option>
-	                      <option value="usa">USA</option>
-	                    </select></div>
-	                </li>
-	                <li class="hb-form-field">
-	                  <div class="hb-form-field-input hb_input_field">
-	                    <select name="tourtax[pa_month]">
-	                      <option value="0">Month</option>
-	                      <option value="january">January</option>
-	                      <option value="february">February</option>
-	                      <option value="march">March</option>
-	                      <option value="april">April</option>
-	                      <option value="may">May</option>
-	                      <option value="june">June</option>
-	                      <option value="july">July</option>
-	                      <option value="august">August</option>
-	                      <option value="september">September</option>
-	                      <option value="october">October</option>
-	                      <option value="november">November</option>
-	                      <option value="december">December</option>
-	                    </select></div>
-	                </li>
+	                </li>	               
 	                <li class="hb-submit">
-	                  <button type="submit">Search Tours</button>
+	                  <router-link v-bind:to="{ title: 'TourDetail', params: { id: titleSearch, type: tp.typeId }}"  class="searchButton">Search Tours</router-link>
 	                </li>
 	              </ul>
 	              <input type="hidden" name="lang" value="">
@@ -527,9 +493,14 @@
 		data () {
 			return {
 					travels: [],  
+					types:[],
 					title:'',
+					titleSearch:'',
 					description:'',
-					duration:''          
+					duration:'',
+					typeSearch:0,
+					typeId:0,
+					typeName:''          
 					}        
 			},
 			created () {
@@ -542,7 +513,16 @@
 							}
 							this.travels.push(data)
 							})
-					});					
+					});	
+					 db.collection('tourType').get().then((querySnapshot) => {                
+							querySnapshot.forEach((doc) => {
+							const data = {
+									'typeId': doc.data().TypeId,
+									'typeName': doc.data().TypeName                                       
+							}
+							this.types.push(data)
+							})
+					});						
 			},
 			methods:{			
 				generateCarousel: function () {
@@ -558,7 +538,7 @@
 							owl.owlCarousel(config);
 						})
 					}
-				}	
+				}			
 			},
 			updated: function () {
 				var vm = this;
@@ -566,7 +546,8 @@
 					.then(function () {
 						vm.generateCarousel();
 					});
-				}
+				},
+			
 			
 	}
 </script>

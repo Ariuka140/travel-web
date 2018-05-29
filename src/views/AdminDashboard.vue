@@ -15,7 +15,7 @@
 												</a>
 												<div class="group-icon">
 													<router-link v-bind:to="{ name: 'editTour', params: { id: tour.id }}"    data-toggle="tooltip" title="Edit" data-placement="top" class="frist" data-original-title="Escorted Tour"><i class="fa fa-pencil"></i></router-link>
-													<a data-toggle="tooltip" title="Delete" data-placement="top" ><i class="fa fa-trash"></i></a>
+													<a @click="deleteTour(tour.id)" data-toggle="tooltip" title="Delete" data-placement="top" ><i class="fa fa-trash"></i></a>
 												</div>
 											</div>
 											<div class="wrapper_content">
@@ -124,7 +124,17 @@
 							}	
 						}
 						});
-				}
+				},
+				deleteTour (id) {
+        if(confirm ('Are you sure?')) {
+          db.collection('travel').where('Id', '==', id).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              doc.ref.delete();
+              this.$router.push('/adminDashboard')
+            })
+          })
+        }
+      }
 			}		
 		}
 </script>

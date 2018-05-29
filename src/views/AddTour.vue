@@ -162,8 +162,7 @@
                         Type:this.type                           
                     })
                     .then(function(event){
-                        alert("success")                   
-                        $('#modalRegisterForm').modal('hide')                        
+                        alert("success")    
                     })               
                     .catch(error => console.log(error))   
                 }
