@@ -95,6 +95,29 @@ aside.left-panel{
 .section-background{
     background-image:url(./../images/khuvsgul_bg.jpg);
 }
+.travel_tour ul.products li.product .item-product .wrapper_content .post_title,
+ .travel_tour ul.products li.product .item-product .wrapper_content .price, 
+ .travel_tour ul.products li.product .item-product .wrapper_content .description, 
+ .travel_tour-page ul.products li.product .item-product .wrapper_content .post_title, 
+ .travel_tour-page ul.products li.product .item-product .wrapper_content .price, 
+ .travel_tour-page ul.products li.product .item-product .wrapper_content .description{
+    height: 48px;
+    overflow: hidden;
+ }
+.item_content .wrapper_content{
+    height: 133px;
+    overflow: hidden;
+}
+.md-form select.form-control{
+    margin-left: 24px;
+    border-width: 0px;
+    border-bottom-width: 1px;
+}
+.md-form textarea.md-textarea{
+    resize: auto;
+    height: auto;
+    padding-bottom:3.5em;
+}
 @media (max-width: 1368px){
     .formStyle{
         padding: 10px 42px;

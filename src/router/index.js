@@ -8,7 +8,8 @@ import MainTemplate from './../containers/MainTemplate'
 import Home from './../views/Home'
 import Tours from './../views/Tours'
 import TourDetail from './../views/TourDetail'
-import addPackage from './../views/addPackage'
+import addTour from './../views/addTour'
+import editTour from './../views/editTour'
 import adminDashboard from './../views/adminDashboard'
 //import responsive from 'vue-responsive'
 
@@ -49,9 +50,14 @@ export default new Router({
      component: full,
      children:[
         {          
-          path:'addPackage',
-          name:'addPackage',
-          component:addPackage          
+          path:'addTour',
+          name:'addTour',
+          component:addTour         
+        },
+        {          
+          path:'edit/:id',
+          name:'editTour',
+          component:editTour          
         },
         {          
           path:'adminDashboard',

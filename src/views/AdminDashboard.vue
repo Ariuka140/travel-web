@@ -1,47 +1,55 @@
  <template>
-    <div class="content container mt-3" style="width:1100px;float:none">     
+    <div class="content container mt-3 travel_tour travel_tour-page" style="width:1100px;float:none">     
 				<div class="shortcode_title title-center title-decoration-bottom-center" style="margin-bottom:30px; margin-top:30px;">
-					<h3 class="title_primary">TRAVELS</h3><span class="line_after_title"></span>
+					<h3 class="title_primary">TOURS</h3><span class="line_after_title"></span>
 				</div>
-        <div class="text-center" style="padding:20px">
-            <div class="wrapper-tours-slider wrapper-tours-type-slider">
-	            <div class="tours-type-slider owl-carousel owl-theme"  data-dots="true" data-nav="true" data-responsive='{"0":{"items":1}, "480":{"items":2}, "768":{"items":3} , "1200":{"items":4}}'>
-								<div class="item-tour"  v-for="travel in travels" v-bind:key="travel.id">
-	                <div class="item_border">
-	                  <div class="item_content" >
-	                    <div class="post_images">
-	                      <router-link to="/admin/addPackage">
-	                      <span class="price">
-	                        <span class="travel_tour-Price-amount amount">$89.00</span>
-	                      </span>
-	                        <img src="./../images/tour/430x305/tour-3.jpg" alt="" title="">
-	                      </router-link>
-	                      <div class="group-icon">
-	                        <a href="#" data-toggle="tooltip" data-placement="top" title="" class="frist" data-original-title="River Cruise"><i class="flaticon-transport-2"></i></a>
-	                        <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Wildlife"><i class="flaticon-island"></i></a>
-	                      </div>
-	                    </div>
-	                    <div class="wrapper_content">
-	                      <div class="post_title"><h4>
-	                        <a href="single-tour.html" rel="bookmark">{{travel.title}}</a>
-	                      </h4></div>
-	                      <span class="post_date" >{{travel.duration}}</span>
-	                      <p>{{travel.description}}</p>
-	                    </div>
-	                  </div>
-	                  <div class="read_more">
-	                    <div class="item_rating">
-	                      <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-	                    </div>
-	                    <router-link to="/admin/addPackage" class="read_more_button">VIEW MORE
-	                      <i class="fa fa-long-arrow-right"></i></router-link>
-	                    <div class="clear"></div>
-	                  </div>
-	                </div>
-	              </div>		             								        
-	            </div>
-	          </div>					
-				</div>
+         <div class="row">
+						<div class="site-main col-sm-12 alignright">
+								<ul class="tours products wrapper-tours-slider">
+										<li v-for="tour in tours" v-bind:key="tour.id" class="item-tour col-md-3 col-sm-4 product">
+												<div class="item_border item-product">
+											<div class="post_images">
+												<a href="single-tour.html">
+													<span class="price">$64.00</span>
+													<img width="430" height="305" src="images/tour/430x305/tour-3.jpg" alt="Discover Brazil" title="Discover Brazil">
+												</a>
+												<div class="group-icon">
+													<router-link v-bind:to="{ name: 'editTour', params: { id: tour.id }}"    data-toggle="tooltip" title="Edit" data-placement="top" class="frist" data-original-title="Escorted Tour"><i class="fa fa-pencil"></i></router-link>
+													<a data-toggle="tooltip" title="Delete" data-placement="top" ><i class="fa fa-trash"></i></a>
+												</div>
+											</div>
+											<div class="wrapper_content">
+												<div class="post_title"><h4>
+													<a href="single-tour.html" rel="bookmark">{{tour.title}}</a>
+												</h4></div>
+												<span class="post_date">{{tour.duration}}</span>
+												<div class="description">
+													<p>{{tour.description}}</p>
+												</div>
+											</div>
+											<div class="read_more">
+												<div class="item_rating">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<router-link v-bind:to="{ name: 'TourDetail', params: { id: tour.id }}" class="button product_type_tour_phys add_to_cart_button">Read more</router-link>
+											</div>
+										</div>							
+										</li>                            
+								</ul>
+								<div class="navigation paging-navigation" role="navigation">
+										<ul class="page-numbers">
+												<li><span class="page-numbers current">1</span></li>
+												<li><a class="page-numbers" href="#">2</a></li>
+												<li><a class="next page-numbers" href="#"><i class="fa fa-long-arrow-right"></i></a>
+												</li>
+										</ul>
+								</div>
+						</div>						
+        </div>
     </div>
 </template> 
 <style>
@@ -63,8 +71,9 @@
 			name:'adminDashboard',      
 			data () {
 			return {
-					travels: [],  
+					tours: [],  
 					title:'',
+					id:'',
 					description:'',
 					duration:''          
 					}        
@@ -75,9 +84,10 @@
 							const data = {
 									'title': doc.data().Title,
 									'description': doc.data().Description,
-									'duration': doc.data().Duration                   
+									'duration': doc.data().Duration,
+									 'id':doc.data().Id                  
 							}
-							this.travels.push(data)
+							this.tours.push(data)
 							})
 					});					
 			},	
@@ -114,29 +124,7 @@
 							}	
 						}
 						});
-				},
-				generateCarousel: function () {
-					if (jQuery().owlCarousel) {
-						jQuery(".wrapper-tours-slider").each(function () {
-							var $this = jQuery(this),
-								owl = $this.find('.tours-type-slider');
-							var config = owl.data();
-							config.slidespeed = 1000;
-							config.margin = 0;
-							config.loop = true;
-							config.navText = ['<i class="lnr lnr-chevron-left"></i>', '<i class="lnr lnr-chevron-right"></i>'];
-							owl.owlCarousel(config);
-						})
-					}
-				}	
-			
-			},
-			updated: function () {
-				var vm = this;
-				Vue.nextTick()
-					.then(function () {
-						vm.generateCarousel();
-					});
 				}
+			}		
 		}
 </script>

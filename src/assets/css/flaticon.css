@@ -180,6 +180,12 @@
 .flaticon-yacht:before {
 	content: "\f125";
 }
+.flaticon-edit:before{
+	content:"\f040";
+}
+.flaticon-trash:before{
+	content:"\f1f8";
+}
 
 .redux-field-info, .redux-group-tab > h2 {
 	padding:     10px 15px;

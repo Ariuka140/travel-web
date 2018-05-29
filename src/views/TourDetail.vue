@@ -31,8 +31,7 @@
                                     <div class="meta_values">
                                         <span>Category:</span>
                                         <div class="value">
-                                            <a href="tours.html" rel="tag">Escorted Tour</a>,
-                                            <a href="tours.html" rel="tag">Rail Tour</a>
+                                            <a rel="tag">{{typeName}}</a>                                           
                                         </div>
                                     </div>
                                     <div class="tour-share">
@@ -115,61 +114,8 @@
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane single-tour-tabs-panel single-tour-tabs-panel--description panel entry-content wc-tab active" id="tab-description">
                                             <h2>Travel Description</h2>
-                                            <p>{{description}</p>
-                                           <table class="tours-tabs_table">
-                                                <tbody>
-                                                <tr>
-                                                    <td><strong>DEPARTURE/RETURN LOCATION</strong></td>
-                                                    <td>San Francisco International Airport</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>DEPARTURE TIME</strong></td>
-                                                    <td>Please arrive at least&nbsp;2 hours before the flight.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>INCLUDED</strong></td>
-                                                    <td>
-                                                        <table>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td><i class="fa fa-check icon-tick icon-tick--on"></i>Airfare
-                                                                </td>
-                                                                <td><i class="fa fa-check icon-tick icon-tick--on"></i>Accommodations
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <i class="fa fa-check icon-tick icon-tick--on"></i>2 days cruise
-                                                                </td>
-                                                                <td>
-                                                                    <i class="fa fa-check icon-tick icon-tick--on"></i>Professional guide
-                                                                </td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>NOT INCLUDED</b></td>
-                                                    <td>
-                                                        <table>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <i class="fa fa-times icon-tick icon-tick--off"></i>Entrance fees
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><i class="fa fa-times icon-tick icon-tick--off"></i>Guide&nbsp;gratuity
-                                                                </td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                         </div>
+                                            <p>{{description}}</p>you                                          
+                                          </div>
                                         <div role="tabpanel" class="tab-pane single-tour-tabs-panel single-tour-tabs-panel--itinerary_tab panel entry-content wc-tab" id="tab-itinerary_tab">
                                             <div class="interary-item">
                                                 <p><span class="icon-left">1</span></p>
@@ -573,44 +519,58 @@ import Vue from 'vue'
 export default {
     name: 'TourDetail',
     data () {
-        return {
-            travels: [],  
+        return {         
             title:'',
-            id:'',
-            doc:'',
+            typeId : 2,
+            typeName:'',
+            id:'',            
             description:'',
             duration:''          
             }        
         },
     beforeRouteEnter (to, from, next) {      
-         db.collection('travel').doc().get().then((querySnapshot) => {
+        db.collection('travel').where('Id', '==', to.params.id).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
             next(vm => {
-                vm.id = doc.data().id
-                vm.title = doc.data().title
-                vm.description = doc.data().description
-                vm.duration = doc.data().duration
+                vm.id = doc.data().Id
+                vm.title = doc.data().Title
+                vm.description = doc.data().Description
+                vm.duration = doc.data().Duration  
+                this.typeId = doc.data().Type              
             })
             })
-        })
-        },
-        watch: {
-        '$route': 'fetchData'
-        },
-        methods:{
-            fetchData () {
-            db.collection('travel').get().then((querySnapshot) => {                
-                querySnapshot.forEach((doc) => {
-                const data = {
-                    'title': doc.data().Title,
-                    'description': doc.data().Description,
-                    'duration': doc.data().Duration                   
-                }
-                this.travels.push(data)
+        });        	
+    },
+    created(){
+        db.collection('tourType').where('TypeId', '==', this.typeId).get().then((querySnapshot) => {               
+            querySnapshot.forEach((doc) => {                 
+                this.typeName = doc.data().TypeName                 
+            })
+        });		
+    },
+    watch: {
+    '$route': 'fetchData'
+    },
+    methods:{
+        fetchData () {            
+            
+            db.collection('travel').where('id', '==', this.$route.params.id).get().then((querySnapshot) => {               
+                querySnapshot.forEach((doc) => {                 
+                    this.title =  doc.data().Title,
+                    this.description =  doc.data().Description,
+                    this.duration =  doc.data().Duration, 
+                    this.typeId =  doc.data().Type      
+                })
+            });	
+            debugger
+            db.collection('tourType').where('TypeId', '==', this.typeId).get().then((querySnapshot) => {               
+                querySnapshot.forEach((doc) => {                 
+                    this.typeName = doc.data().TypeName                 
                 })
             });					
         }    
     }
 }
 </script>
+
 

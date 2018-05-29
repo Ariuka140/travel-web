@@ -121,7 +121,8 @@
             key:'',  
             title:'',
             description:'',
-            duration:''
+            duration:'',
+            id: 0
             }        
         },
         created () {
@@ -129,7 +130,7 @@
             db.collection('travel').get().then((querySnapshot) => {                
                 querySnapshot.forEach((doc) => {                   
                 const data = {
-                    'key':doc._key,
+                    'id': doc.data().Id,                    
                     'title': doc.data().Title,
                     'description': doc.data().Description,
                     'duration': doc.data().Duration                   
