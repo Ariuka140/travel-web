@@ -7,13 +7,13 @@
                 </div>         
                 <div class="md-form mb-5">
                     <i class="fa fa-tag prefix grey-text"></i>
-                    <input type="text" id="form34" class="form-control validate" v-model="title">
+                    <input type="text" id="form34" class="form-control validate" v-model="title" disabled required>
                     <label for="form34" class="active">Title</label>
                 </div>
                 <div class="row">
                     <div class="md-form col-md-11">
                         <i class="fa fa-calendar prefix grey-text"></i>                           
-                            <input type="number" id="form29"  class="form-control validate" v-model="duration">
+                            <input type="number" id="form29"  class="form-control validate" v-model="duration" required>
                             
                         <label style="margin-left: 4.3rem;" for="form29" class="active">Duration</label>
                     </div>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="md-form">
                     <i class="fa fa-info-circle prefix grey-text"></i>
-                    <textarea type="text" id="form8" class="md-textarea form-control" v-model="description"></textarea>
+                    <textarea type="text" id="form8" class="md-textarea form-control validate" required v-model="description"></textarea>
                     <label for="form8" class="active">Description</label>
                 </div>
                 <div class="md-form">                    
