@@ -163,6 +163,7 @@
                     })
                     .then(function(event){
                         alert("success")    
+                        this.$router.push('/adminDashboard')
                     })               
                     .catch(error => console.log(error))   
                 }

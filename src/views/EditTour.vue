@@ -136,7 +136,7 @@
                     vm.title = doc.data().Title
                     vm.description = doc.data().Description
                     vm.duration = doc.data().Duration  
-                    this.typeId = doc.data().Type              
+                    vm.typeId = doc.data().Type              
                 })
                 })
             });        	
@@ -164,7 +164,7 @@
                         })
                         .then(() => {
                             alert("success") 
-                            this.$router.push({ name: 'TourDetail', params: { id: this.id }})
+                            this.$router.push('/adminDashboard')
                           
                         });
                     })
