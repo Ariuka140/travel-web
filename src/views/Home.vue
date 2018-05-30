@@ -31,7 +31,7 @@
 	                  </div>
 	                </li>	               
 	                <li class="hb-submit">
-	                  <router-link v-bind:to="{ title: 'TourDetail', params: { id: titleSearch, type: tp.typeId }}"  class="searchButton">Search Tours</router-link>
+	                  <router-link to="/Tours"  class="searchButton">Search Tours</router-link>
 	                </li>
 	              </ul>
 	              <input type="hidden" name="lang" value="">
