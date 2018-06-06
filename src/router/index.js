@@ -8,9 +8,9 @@ import MainTemplate from './../containers/MainTemplate'
 import Home from './../views/Home'
 import Tours from './../views/Tours'
 import TourDetail from './../views/TourDetail'
-import addTour from './../views/addTour'
-import editTour from './../views/editTour'
-import adminDashboard from './../views/adminDashboard'
+import addTour from './../views/AddTour'
+import editTour from './../views/EditTour'
+import adminDashboard from './../views/AdminDashboard'
 //import responsive from 'vue-responsive'
 
 //Vue.use(responsive)
