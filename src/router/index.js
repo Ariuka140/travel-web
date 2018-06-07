@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // Containers
-import full from './../containers/Full'
+import full from './../containers/full'
 
 import MainTemplate from './../containers/mainTemplate'
 import Home from './../views/home'
