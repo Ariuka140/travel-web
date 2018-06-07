@@ -2,15 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // Containers
-import full from './../containers/full'
+import full from './../containers/Full'
 
-import MainTemplate from './../containers/mainTemplate'
-import Home from './../views/home'
-import Tours from './../views/tours'
-import TourDetail from './../views/tourDetail'
-import addTour from './../views/addTour'
-import editTour from './../views/editTour'
-import adminDashboard from './../views/adminDashboard'
+import MainTemplate from './../containers/MainTemplate'
+import Home from './../views/Home'
+import Tours from './../views/Tours'
+import TourDetail from './../views/TourDetail'
+import addTour from './../views/AddTour'
+import editTour from './../views/EditTour'
+import adminDashboard from './../views/AdminDashboard'
 //import responsive from 'vue-responsive'
 
 //Vue.use(responsive)
