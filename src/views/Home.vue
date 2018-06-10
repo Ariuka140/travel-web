@@ -31,7 +31,7 @@
 	                  </div>
 	                </li>	               
 	                <li class="hb-submit">
-	                  <router-link to="/Tours"  class="searchButton">Search Tours</router-link>
+	                  <router-link v-bind:to="{ name: 'Tours', params: { titleSearch : titleSearch, typeSearch: typeSearch }}"   class="searchButton">Search Tours</router-link>
 	                </li>
 	              </ul>
 	              <input type="hidden" name="lang" value="">
@@ -111,7 +111,7 @@
 	      <div class="padding-top-6x padding-bottom-6x section-background">
 	        <div class="container">	    
 							<div class="shortcode_title title-center title-decoration-bottom-center" style="margin-bottom:30px; margin-top:30px;">
-							<h3 class="title_primary" style="color:#fff;">TRAVELS</h3><span class="line_after_title"></span>
+							<h3 class="title_primary" style="color:#fff;">TOURS</h3><span class="line_after_title"></span>
 						</div>
 						<div class="text-center" style="padding:20px">
 								<div class="wrapper-tours-slider wrapper-tours-type-slider whitePointer">
@@ -143,7 +143,7 @@
 													<div class="item_rating">
 														<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
 													</div>
-													<router-link to="/admin/addPackage" class="read_more_button">VIEW MORE
+													<router-link v-bind:to="{ name: 'TourDetail', params: { id: travel.id }}" class="read_more_button">VIEW MORE
 														<i class="fa fa-long-arrow-right"></i></router-link>
 													<div class="clear"></div>
 												</div>
@@ -492,6 +492,7 @@
 		name:'Home',
 		data () {
 			return {
+					id:'',
 					travels: [],  
 					types:[],
 					title:'',
@@ -503,10 +504,12 @@
 					typeName:''          
 					}        
 			},
+			
 			created () {
 					db.collection('travel').get().then((querySnapshot) => {                
 							querySnapshot.forEach((doc) => {
 							const data = {
+									'id':doc.data().Id,
 									'title': doc.data().Title,
 									'description': doc.data().Description,
 									'duration': doc.data().Duration                   

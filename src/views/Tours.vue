@@ -66,8 +66,8 @@
                                 <div class="form-block__description">Find your dream tour today!</div>
                                 <form method="get" action="#">
                                     <input type="hidden" name="tour_search" value="1">
-                                    <input type="text" placeholder="Search Tour" value="" name="name_tour">
-                                    <select name="tourtax[tour_phys]">
+                                    <input type="text" placeholder="Search Tour" value="" name="name_tour"  v-model="titleSearch">
+                                    <select name="tourtax[tour_phys]" v-model="typeSearch">
                                         <option value="0">Tour Type</option>
                                         <option value="escorted-tour">Escorted Tour</option>
                                         <option value="rail-tour">Rail Tour</option>
@@ -99,7 +99,7 @@
                                         <option value="november">November</option>
                                         <option value="december">December</option>
                                     </select>
-                                    <button type="submit">Find Tours</button>
+                                    <button type="button" @click="search">Find Tours</button>
                                 </form>
                             </div>
                         </div>                       
@@ -119,25 +119,69 @@
         return {
             travels: [],
             key:'',  
+            typeSearch :'',
+            titleSearch :'',
             title:'',
             description:'',
             duration:'',
             id: 0
             }        
         },
+        beforeRouteEnter (to, from, next) {      
+            console.log(to.params);
+            next(vm => {
+                vm.titleSearch = to.params.titleSearch
+                vm.typeSearch = to.params.typeSearch                   
+            })     	
+        },
         created () {
-             debugger;
-            db.collection('travel').get().then((querySnapshot) => {                
-                querySnapshot.forEach((doc) => {                   
-                const data = {
-                    'id': doc.data().Id,                    
-                    'title': doc.data().Title,
-                    'description': doc.data().Description,
-                    'duration': doc.data().Duration                   
-                }
-                this.travels.push(data)
-                })
-            });					
-        }     
+            console.log("2: ")
+            console.log(this.$route.params.titleSearch)
+            
+            db.collection('travel').get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const data = {
+                        'id': doc.data().Id,                    
+                        'title': doc.data().Title,
+                        'description': doc.data().Description,
+                        'duration': doc.data().Duration                   
+                    }
+                    this.travels.push(data)
+                })    
+                if(this.$route.params){
+                    this.travels = this.searchFromArray(this.travels, this.$route.params.titleSearch)
+                }               
+            }); 
+        },
+        watch: {
+        '$route': 'fetchData'
+        },
+        methods: {
+            searchFromArray(travels, searchValue){
+                var filtered_travels = jQuery.grep(travels, function(value) {
+                    return value.title.toUpperCase().indexOf(searchValue.toUpperCase()) >= 0;
+                });
+                return filtered_travels;
+            },
+            search(){
+                console.log("3: ") 
+                console.log(this.titleSearch)
+                this.travels = []
+                db.collection('travel').get().then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        const data = {
+                            'id': doc.data().Id,                    
+                            'title': doc.data().Title,
+                            'description': doc.data().Description,
+                            'duration': doc.data().Duration                   
+                        }
+                        this.travels.push(data)
+                    })
+                    if(this.titleSearch){
+                        this.travels = this.searchFromArray(this.travels, this.titleSearch)
+                    }                 
+                });
+            }
+        }
     }
 </script>

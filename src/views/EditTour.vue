@@ -127,26 +127,27 @@
             selectedFile:null           
             }
 
-        },   
-        beforeRouteEnter (to, from, next) {      
-            db.collection('travel').where('Id', '==', to.params.id).get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                next(vm => {
-                    vm.id = doc.data().Id
-                    vm.title = doc.data().Title
-                    vm.description = doc.data().Description
-                    vm.duration = doc.data().Duration  
-                    vm.typeId = doc.data().Type              
-                })
-                })
-            });        	
-        },
+        }, 
         created(){
-        db.collection('tourType').where('TypeId', '==', this.typeId).get().then((querySnapshot) => {               
-            querySnapshot.forEach((doc) => {                 
-                this.typeName = doc.data().TypeName                 
-                })
-            });		
+            db.collection('tourType').get().then((querySnapshot) => {               
+                querySnapshot.forEach((doc) => {  
+                    const data = {
+                        'typeId' : doc.data().TypeId,
+                        'typeName' : doc.data().TypeName   
+                    }               
+                    this.types.push(data)         
+                })                
+            });
+            db.collection('travel').where('Id', '==', this.$route.params.id).get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {            
+                    this.id = doc.data().Id
+                    this.title = doc.data().Title
+                    this.description = doc.data().Description
+                    this.duration = doc.data().Duration  
+                    this.typeId = doc.data().Type   
+                })            
+                
+            }); 
         },
         watch: {
         '$route': 'fetchData'
@@ -195,22 +196,7 @@
                     e.preventDefault();
                     return false;
                 });
-            },
-            fetchData () {            
-                db.collection('travel').where('id', '==', this.$route.params.id).get().then((querySnapshot) => {               
-                    querySnapshot.forEach((doc) => {                 
-                        this.title =  doc.data().Title,
-                        this.description =  doc.data().Description,
-                        this.duration =  doc.data().Duration, 
-                        this.typeId =  doc.data().Type      
-                    })
-                });	                
-                db.collection('tourType').where('TypeId', '==', this.typeId).get().then((querySnapshot) => {               
-                    querySnapshot.forEach((doc) => {                 
-                        this.typeName = doc.data().TypeName                 
-                    })
-                });					
-            },    
+            },              
             detectFiles(event){
                 this.selectedFile=event.target.file[0];                 
             }              

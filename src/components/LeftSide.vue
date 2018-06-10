@@ -6,8 +6,11 @@
             <ul class="nav navbar-nav">                           
                 <h3 class="menu-title">Admin Dashboard</h3><!-- /.menu-title -->
                 <li class="menu-item">
-                    <router-link to="/admin/addTour" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-suitcase"></i>Add Tour</router-link>                    
-                </li>                   
+                    <router-link to="/admin/adminDashboard" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-suitcase"></i>Tour List</router-link>                    
+                </li>  
+                <li class="menu-item">
+                    <router-link to="/admin/adminDashboard" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-suitcase"></i>Order List</router-link>                    
+                </li>     
             </ul>
         </div>
     </nav>

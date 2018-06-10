@@ -37,10 +37,10 @@
 	          <span class="icon-bar"></span>
 	        </div>
 	        <div class="width-logo sm-logo">
-	          <a href="#" title="Travel" rel="home">
+	          <router-link to="/home" _target="blank" title="Travel" rel="home">
 	            <img src="./../images/logo.png" alt="Logo" width="474" height="130" class="logo_transparent_static">
 	            <img src="./../images/logo_sticky.png" alt="Sticky logo" width="474" height="130" class="logo_sticky">
-	          </a>
+	          </router-link>
 	        </div>
 	        <nav class="width-navigation">
 	          <ul class="nav navbar-nav menu-main-menu side-nav" id="mobile-demo">

@@ -46,8 +46,8 @@ export default new Router({
     },{
      path: '/admin',      
      name: 'Admin',
-     redirect:'/admin/adminDashboard',
      component: full,
+     redirect:'/admin/adminDashboard',     
      children:[
         {          
           path:'addTour',

@@ -149,3 +149,8 @@ aside.left-panel{
         padding: 10px 22px;
     }
 }
+@media (min-width: 993px){
+    .navbar-nav > li{
+        margin-left: 0px;
+    }
+}

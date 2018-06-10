@@ -4,9 +4,9 @@
             <button type="button" class="sidebar-toggle-box" @click="toggleLeft()">          
               <div class="fa fa-bars" style="color:#676b70"></div>
             </button>
-            <router-link title="Travel" to="/admin/adminDashboard" style="margin-left: 8px;" >
+            <a title="Travel" href="/" target="_blank" style="margin-left: 8px;" >
                 <img src="./../images/logo.png" alt="Logo" width="85" height="30" class="logo_transparent_static" style="padding: 5px 0px;">
-            </router-link>            
+            </a>           
             <ul class="adminHeader">
               <li><i class="fa fa-phone"></i> 0123456789</li>
               <li class="hidden-info">
