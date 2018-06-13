@@ -437,7 +437,7 @@
 										<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FMaranathaTourMongolia&width=600&colorscheme=light&show_faces=false&border_color&stream=true&header=false&height=435" scrolling="yes" style="border:none; overflow:hidden; width:600px; height:430px; background: white; float:left; " allowtransparency="true" frameborder="0"></iframe>
 									</div>
 									<div class="post_list_content_unit col-sm-6">
-										<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FMaranathaTourMongolia%2Fposts%2F2063980017177502&width=500" width="500" height="719" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+										<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FMaranathaTourMongolia%2Fposts%2F2063980017177502&width=500" width="500" height="430" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 									</div>
 	                <!-- <div class="post_list_content_unit col-sm-6">
 	                  <div class="feature-image">
