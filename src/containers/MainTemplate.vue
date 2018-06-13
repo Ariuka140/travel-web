@@ -9,7 +9,7 @@
 	            <aside id="text-15" class="widget_text">
 	              <div class="textwidget">
 	                <ul class="top_bar_info clearfix">
-	                  <li><i class="fa fa-clock-o"></i> Mon - Sat 8.00 - 18.00. Sunday CLOSED</li>
+	                  <li><i class="fa fa-clock-o"></i>.</li>
 	                </ul>
 	              </div>
 	            </aside>
@@ -18,7 +18,7 @@
 	            <aside id="text-7" class="widget widget_text">
 	              <div class="textwidget">
 	                <ul class="top_bar_info clearfix">
-	                  <li><i class="fa fa-phone"></i> 0123456789</li>
+	                  <li><i class="fa fa-phone"></i>+976 99075612, +976 88183572</li>
 	                  <li class="hidden-info">
 	                    <i class="fa fa-map-marker"></i> Ulaanbaatar, Mongolia
 	                  </li>
@@ -37,7 +37,7 @@
 	          <span class="icon-bar"></span>
 	        </div>
 	        <div class="width-logo sm-logo">
-	          <router-link to="/home" _target="blank" title="Travel" rel="home">
+	          <router-link to="/" title="Travel" rel="home">
 	            <img src="./../images/logo.png" alt="Logo" width="474" height="130" class="logo_transparent_static">
 	            <img src="./../images/logo_sticky.png" alt="Sticky logo" width="474" height="130" class="logo_sticky">
 	          </router-link>
@@ -45,13 +45,13 @@
 	        <nav class="width-navigation">
 	          <ul class="nav navbar-nav menu-main-menu side-nav" id="mobile-demo">
 	            <li>
-	              <a href="index.html">Home</a>	             
+	              <a href="../">Home</a>	             
 	            </li>
 	            <li>
 	              <a href="tours.html">Tours</a>	             
 	            </li>
 							<li>
-	              <a href="tours.html">Destinations</a>	             
+	              <a href="tours.html">Travel tools</a>	             
 	            </li>
 	            <li><a href="contact.html">Contact</a></li>
 	            <li class="menu-right">
@@ -150,7 +150,7 @@
 	                <li><a href="#">Privacy Policy</a></li>
 	                <li>|</li>
 	                <li><a href="https://twitter.com/physcode"><i class="fa fa-twitter"></i></a></li>
-	                <li><a href="https://www.facebook.com/physcode/"><i class="fa fa-facebook"></i></a></li>
+	                <li><a href="https://www.facebook.com/MaranathaTourMongolia/"><i class="fa fa-facebook"></i></a></li>
 	                <li><a href="https://www.instagram.com/physcode/"><i class="fa fa-instagram"></i></a>
 	                </li>
 	              </ul>

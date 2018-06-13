@@ -7,7 +7,7 @@
 	        </video>
 	        <div class="content-slider">
 	          <p>Find your special tour today </p>
-	          <h2>With Travel Tours </h2>
+	          <h2>With Maranatha Tour</h2>
 	          <p><router-link to="/Tours" class="btn btn-slider">VIEW TOURS </router-link></p>
 	        </div>
 	      </div>
@@ -111,7 +111,7 @@
 	      <div class="padding-top-6x padding-bottom-6x section-background">
 	        <div class="container">	    
 							<div class="shortcode_title title-center title-decoration-bottom-center" style="margin-bottom:30px; margin-top:30px;">
-							<h3 class="title_primary" style="color:#fff;">TOURS</h3><span class="line_after_title"></span>
+							<h3 class="title_primary" style="color:#fff;">MOST RECOMMENDED TOURS</h3><span class="line_after_title"></span>
 						</div>
 						<div class="text-center" style="padding:20px">
 								<div class="wrapper-tours-slider wrapper-tours-type-slider whitePointer">
@@ -158,7 +158,7 @@
 	      <div class="padding-top-6x padding-bottom-6x bg__shadow section-background">
 	        <div class="container">
 	          <div class="shortcode_title text-white title-center title-decoration-bottom-center">
-	            <div class="title_subtitle">Some statistics about Travel WP</div>
+	            <div class="title_subtitle">Some statistics about us</div>
 	            <h3 class="title_primary">CENTER ACHIEVEMENTS</h3>
 	            <span class="line_after_title white-text"></span>
 	          </div>
@@ -178,7 +178,7 @@
 	                  <i class="flaticon-island"></i>
 	                </div>
 	                <div class="stats_counter_number">1021</div>
-	                <div class="stats_counter_title">Destinations</div>
+	                <div class="stats_counter_title">Travel tools</div>
 	              </div>
 	            </div>
 	            <div class="col-sm-3">
@@ -433,7 +433,13 @@
 	                <span class="line_after_title"></span>
 	              </div>
 	              <div class="row">
-	                <div class="post_list_content_unit col-sm-6">
+									<div class="post_list_content_unit col-sm-6">
+										<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FMaranathaTourMongolia&width=600&colorscheme=light&show_faces=false&border_color&stream=true&header=false&height=435" scrolling="yes" style="border:none; overflow:hidden; width:600px; height:430px; background: white; float:left; " allowtransparency="true" frameborder="0"></iframe>
+									</div>
+									<div class="post_list_content_unit col-sm-6">
+										<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FMaranathaTourMongolia%2Fposts%2F2063980017177502&width=500" width="500" height="719" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+									</div>
+	                <!-- <div class="post_list_content_unit col-sm-6">
 	                  <div class="feature-image">
 	                    <a href="#" class="entry-thumbnail">
 	                      <img width="370" height="260" src="./../images/blog/201H.jpg" alt="">
@@ -453,8 +459,8 @@
 	                      <div class="post_list_item_excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam efficitur</div>
 	                    </div>
 	                  </div>
-	                </div>
-	                <div class="post_list_content_unit col-sm-6">
+	                </div> -->
+	                <!-- <div class="post_list_content_unit col-sm-6">
 	                  <div class="feature-image">
 	                    <a href="#" class="entry-thumbnail">
 	                      <img width="370" height="260" src="./../images/blog/86H.jpg" alt="">
@@ -474,7 +480,7 @@
 	                      <div class="post_list_item_excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam efficitur</div>
 	                    </div>
 	                  </div>
-	                </div>
+	                </div> -->
 	              </div>
 	            </div>
 	          </div>
