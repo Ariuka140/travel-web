@@ -10,6 +10,9 @@
                 </li>  
                 <li class="menu-item">
                     <router-link to="/admin/adminDashboard" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-suitcase"></i>Order List</router-link>                    
+                </li>  
+                 <li class="menu-item">
+                    <router-link to="/admin/categories" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-suitcase"></i>Category List</router-link>                    
                 </li>     
             </ul>
         </div>

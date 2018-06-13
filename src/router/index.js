@@ -11,6 +11,7 @@ import TourDetail from './../views/TourDetail'
 import addTour from './../views/AddTour'
 import editTour from './../views/EditTour'
 import adminDashboard from './../views/AdminDashboard'
+import categories from './../views/Categories'
 //import responsive from 'vue-responsive'
 
 //Vue.use(responsive)
@@ -63,7 +64,13 @@ export default new Router({
           path:'adminDashboard',
           name:'adminDashboard',
           component:adminDashboard          
-        }
+        },
+        {          
+          path:'categories',
+          name:'categories',
+          component:categories          
+        },
+
       ]
     }
     ]
