@@ -38,20 +38,21 @@
                         </div>                                
                         <div class="col-md-8 controls" style="padding-left:0px">
                             <div class="entry input-group">                                          
-                                <input type="file" multiple accept=".jpg,.png" id="image" class="file-field form-control"  v-on:change="image_choosed" style="border:none;box-shadow:none;width:74%;padding-top: 3px;">                    
-                                <span>
+                                <!-- <input type="file" multiple accept=".jpg,.png" id="image" class="file-field form-control"  v-on:change="image_choosed" style="border:none;box-shadow:none;width:74%;padding-top: 3px;">                     -->
+                                Files: <input type="file" id="files" name="files" v-on:change="handleFileSelect" multiple accept="image/*"><br/>
+                                <!-- <span>
                                     <button type="button" v-on:click="addImage" class="btn cyan btn-rounded fileBtn"><i class="fa fa-plus pr-2" aria-hidden="true"></i></button>                                                                                                                        
-                                </span>
-            
-                                </div>
-                            </div> 
+                                </span> -->
+                                <div style="float:left;" id="selectedFiles"></div>
+                            </div>
                         </div>
-                    </div>  
-                    <div class="md-form" style="text-align:center">                 
-                        <button type="submit" class="btn btn-warning btn-rounded mb-4">
-                         <i class="fa fa-upload" style="margin-right:5px;"/>Insert</button>
                     </div>
-                </form>
+                </div>  
+                <div class="md-form" style="text-align:center">                 
+                    <button type="submit" class="btn btn-warning btn-rounded mb-4">
+                        <i class="fa fa-upload" style="margin-right:5px;"/>Insert</button>
+                </div>
+            </form>
     </div>
 </template>
 <style>
@@ -97,7 +98,7 @@
     import mdb from './../assets/js/mdb.min.js'
     import axios from './../assets/js/axios.min.js'
     import firebase from 'firebase'
-
+		
     //Хэрвээ и-мэйл auth хийх бол
     // firebase.auth().createUserWithEmailAndPassword("email@gmail.com", "pass").catch(function(error) {
     //     // Handle Errors here.
@@ -111,9 +112,7 @@
         name:'addTour',
         data(){
             return{
-            package: [], 
-            ids:[],
-            id:'',          
+            package: [],           
             title:'',
             description:'',
             duration:'',
@@ -121,7 +120,7 @@
             typeId: 0,
             typeName:'',
             types:[],
-            selectedFiles:[]           
+            selected_file_list:[]           
             }
 
         },   
@@ -136,65 +135,98 @@
                 })
             });					
         },	           
-        methods:{            
-            insert(){  
+        methods:{
+            generatePushID() {
+                // Modeled after base64 web-safe chars, but ordered by ASCII.
+                var PUSH_CHARS = '-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
 
-                db.collection('travel').get().then((querySnapshot) => {                
-                    querySnapshot.forEach((doc) => { 
-                        debugger                       
-                        if(doc.data().Id)                   
-                            ids.push(doc.data().Id) 
-                        else
-                            ids.push(1)                                
-                    })
-                    this.id = Math.max.apply(null, ids) + 1;         
-                })
-                if(this.id){
-                    db.collection('travel').doc(this.id.toString()).set({
-                        Title: this.title,
-                        Description:this.description,
-                        Duration:this.duration,
-                        Id:this.id,
-                        Type:this.type                           
-                    })
-                    .then(function(event){
-                        // upload images then
-                        for (var file in selectedFiles) {
-                            this.upload_image_firebase('001', file);
-                        }
-                                                
-                        this.$router.push('/adminDashboard')
-                    })               
-                    .catch(error => console.log(error))   
+                // Timestamp of last push, used to prevent local collisions if you push twice in one ms.
+                var lastPushTime = 0;
+
+                // We generate 72-bits of randomness which get turned into 12 characters and appended to the
+                // timestamp to prevent collisions with other clients.  We store the last characters we
+                // generated because in the event of a collision, we'll use those same characters except
+                // "incremented" by one.
+                var lastRandChars = [];
+                var now = new Date().getTime();
+                var duplicateTime = (now === lastPushTime);
+                lastPushTime = now;
+
+                var timeStampChars = new Array(8);
+                for (var i = 7; i >= 0; i--) {
+                timeStampChars[i] = PUSH_CHARS.charAt(now % 64);
+                // NOTE: Can't use << here because javascript will convert to int and lose the upper bits.
+                now = Math.floor(now / 64);
                 }
-                               
-            },                   
-            addImage(event){
-                $(document).on('click', '.fileBtn', function(e)
-                {
-                    e.preventDefault();
-                    var controlForm = $('.controls:first'),
-                        currentEntry = $(this).parents('.entry:first'),
-                        newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                if (now !== 0) throw new Error('We should have converted the entire timestamp.');
 
-                    newEntry.find('input').val('');
-                    controlForm.find('.entry:not(:last) .fileBtn')
-                        .removeClass('fileBtn').addClass('cancelBtn')
-                        .removeClass('cyan').addClass('orange')                         
-                        .html('<i class="fa fa-minus pr-2" aria-hidden="true"></i>');
-                        debugger;
-                }).on('click', '.cancelBtn', function(e)
-                {
-                    if($(this).parents('.entry'))
-                        $(this).parents('.entry:first').remove();
-                    else
-                        $(this).removeClass('cancelBtn').addClass('fileBtn')
-                            .removeClass('orange').addClass('cyan')                         
-                            .html('<i class="fa fa-plus pr-2" aria-hidden="true"></i>');
-                    e.preventDefault();
-                    return false;
-                });
+                var id = timeStampChars.join('');
+
+                if (!duplicateTime) {
+                for (i = 0; i < 12; i++) {
+                    lastRandChars[i] = Math.floor(Math.random() * 64);
+                }
+                } else {
+                // If the timestamp hasn't changed since last push, use the same random number, except incremented by 1.
+                for (i = 11; i >= 0 && lastRandChars[i] === 63; i--) {
+                    lastRandChars[i] = 0;
+                }
+                lastRandChars[i]++;
+                }
+                for (i = 0; i < 12; i++) {
+                id += PUSH_CHARS.charAt(lastRandChars[i]);
+                }
+                if(id.length != 20) throw new Error('Length should be 20.');
+
+                return id;
+            },        
+            insert(){
+                var key=this.generatePushID();
+                debugger
+                db.collection('travel').doc(key).set({
+                    Title: this.title,
+                    Description:this.description,
+                    Duration:this.duration,
+                    Type:this.type                           
+                })
+                .then(function(event){
+                    debugger
+                    // upload images then
+                    if(this.selected_file_list){
+                        for (var file in this.selected_file_list) {
+                            this.upload_image_firebase(key, file);
+                        }   
+                    }
+                               
+                    this.$router.push('/adminDashboard')
+                })               
+                .catch(error => console.log(error))
             },
+            // addImage(event){
+            //     $(document).on('click', '.fileBtn', function(e)
+            //     {
+            //         e.preventDefault();
+            //         var controlForm = $('.controls:first'),
+            //             currentEntry = $(this).parents('.entry:first'),
+            //             newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+            //         newEntry.find('input').val('');
+            //         controlForm.find('.entry:not(:last) .fileBtn')
+            //             .removeClass('fileBtn').addClass('cancelBtn')
+            //             .removeClass('cyan').addClass('orange')                         
+            //             .html('<i class="fa fa-minus pr-2" aria-hidden="true"></i>');
+            //     }).on('click', '.cancelBtn', function(e)
+            //     {
+            //         if($(this).parents('.entry'))
+            //             $(this).parents('.entry:first').remove();
+            //         else
+            //             $(this).removeClass('cancelBtn').addClass('fileBtn')
+            //                 .removeClass('orange').addClass('cyan')                         
+            //                 .html('<i class="fa fa-plus pr-2" aria-hidden="true"></i>');
+            //         e.preventDefault();
+            //         return false;
+            //     });
+            // },
             upload_image_firebase(foldername, file){
                 
                 // Get a reference to the storage service, which is used to create references in your storage bucket
@@ -251,7 +283,29 @@
 
             image_choosed(event){
                 var fileToLoad = event.target.files[0];
-                selectedFiles.push(fileToLoad)
+                this.selected_file_list.push(fileToLoad)
+            },
+
+            handleFileSelect(e) {
+
+                if(!e.target.files || !window.FileReader) return;
+                var selDiv = document.getElementById("selectedFiles");
+                selDiv.innerHTML = "";
+                
+                var filesArr = Array.prototype.slice.call(e.target.files);
+                filesArr.forEach(function(f) {
+                    if(!f.type.match("image.*")) {
+                        return;
+                    }
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var html = "<img style='height:180px;' clear=\"left\" src=\"" + e.target.result + "\">";
+                        selDiv.innerHTML += html;				
+                    }
+                    reader.readAsDataURL(f); 
+                });
+                
             }
         }   
     }
