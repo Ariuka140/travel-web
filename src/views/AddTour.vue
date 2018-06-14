@@ -38,7 +38,7 @@
                         </div>                                
                         <div class="col-md-8 controls" style="padding-left:0px">
                             <div class="entry input-group">                                          
-                                <input type="file" multiple accept=".jpg,.png" id="image" class="file-field form-control"  v-on:change="detectFiles" style="border:none;box-shadow:none;width:74%;padding-top: 3px;">                    
+                                <input type="file" multiple accept=".jpg,.png" id="image" class="file-field form-control"  v-on:change="image_choosed" style="border:none;box-shadow:none;width:74%;padding-top: 3px;">                    
                                 <span>
                                     <button type="button" v-on:click="addImage" class="btn cyan btn-rounded fileBtn"><i class="fa fa-plus pr-2" aria-hidden="true"></i></button>                                                                                                                        
                                 </span>
@@ -97,10 +97,8 @@
     import mdb from './../assets/js/mdb.min.js'
     import axios from './../assets/js/axios.min.js'
     import firebase from 'firebase'
-    //import * as axios from 'axios';
 
-    const BASE_URL = 'http://localhost:8080';
-
+    //Хэрвээ и-мэйл auth хийх бол
     // firebase.auth().createUserWithEmailAndPassword("email@gmail.com", "pass").catch(function(error) {
     //     // Handle Errors here.
     //     var errorCode = error.code;
@@ -108,17 +106,7 @@
     //     // ...
     // });
 
-    /*function upload(formData) {
-        const url = `${BASE_URL}/images/upload  `;
-        return axios.post(url, formData)
-            // get data
-            .then(x => x.data)
-            // add url field
-            .then(x => x.map(img => Object.assign({},
-                img, { url: `${BASE_URL}/images/${img.id}` })));
-    }*/
     var ids = [];
-    //const BASE_URL = 'http://localhost:8080';
     export default{
         name:'addTour',
         data(){
@@ -133,7 +121,7 @@
             typeId: 0,
             typeName:'',
             types:[],
-            selectedFile:null           
+            selectedFiles:[]           
             }
 
         },   
@@ -170,7 +158,11 @@
                         Type:this.type                           
                     })
                     .then(function(event){
-                        alert("success")    
+                        // upload images then
+                        for (var file in selectedFiles) {
+                            this.upload_image_firebase('001', file);
+                        }
+                                                
                         this.$router.push('/adminDashboard')
                     })               
                     .catch(error => console.log(error))   
@@ -203,7 +195,7 @@
                     return false;
                 });
             },
-            upload_image_firebase(file){
+            upload_image_firebase(foldername, file){
                 
                 // Get a reference to the storage service, which is used to create references in your storage bucket
                 var storage = firebase.storage();
@@ -217,7 +209,7 @@
                 };
 
                 // Upload file and metadata to the object 'images/mountains.jpg'
-                var uploadTask = storageRef.child('003/' + file.name).put(file, metadata);
+                var uploadTask = storageRef.child(foldername + '/' + file.name).put(file, metadata);
 
                 // Listen for state changes, errors, and completion of the upload.
                 uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
@@ -256,9 +248,10 @@
                     });
                 });
             },
-            detectFiles(event){
+
+            image_choosed(event){
                 var fileToLoad = event.target.files[0];
-                this.upload_image_firebase(fileToLoad);
+                selectedFiles.push(fileToLoad)
             }
         }   
     }
