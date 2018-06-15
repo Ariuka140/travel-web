@@ -16,7 +16,7 @@ module.exports = {
     host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 80, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     disableHostCheck: true,
-    https: false,
+    compress: true,
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
