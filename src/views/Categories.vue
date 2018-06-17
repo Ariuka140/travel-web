@@ -56,8 +56,29 @@
                     </div>
                     <div class="modal-body">
                         <div class="row typeIcon" id="images">
-                            <div class="col-md-2">
-                                <a><i class="flaticon-airplane-4"></i></a>
+                            <div class="col-md-3">
+                                <a><i class="flaticon-boating-sign"></i></a>
+                            </div>
+                             <div class="col-md-3">
+                                <a><i class="flaticon-bicycle-rider"></i></a>
+                            </div>
+                             <div class="col-md-3">
+                                <a><i class="flaticon-climbing-with-rope"></i></a>
+                            </div>
+                             <div class="col-md-3">
+                                <a><i class="flaticon-hunter-hunting-with-bow-and-arrow"></i></a>
+                            </div>
+                             <div class="col-md-3">
+                                <a><i class="flaticon-wrestling"></i></a>
+                            </div>
+                             <div class="col-md-3">
+                                <a><i class="flaticon-backpacker-hiking"></i></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a><i class="flaticon-camels-race"></i></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a><i class="flaticon-man-riding-a-horse"></i></a>
                             </div>
                         </div>
                     </div>              

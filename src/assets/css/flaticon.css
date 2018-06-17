@@ -200,3 +200,12 @@
 .redux-field-info {
 	border-top: none;
 }
+.flaticon-boating-sign:before { content: "\f100"; }
+.flaticon-bicycle-rider:before { content: "\f101"; }
+.flaticon-climbing-with-rope:before { content: "\f102"; }
+.flaticon-climb:before { content: "\f103"; }
+.flaticon-hunter-hunting-with-bow-and-arrow:before { content: "\f104"; }
+.flaticon-wrestling:before { content: "\f105"; }
+.flaticon-backpacker-hiking:before { content: "\f106"; }
+.flaticon-camels-race:before { content: "\f107"; }
+.flaticon-man-riding-a-horse:before { content: "\f108"; }

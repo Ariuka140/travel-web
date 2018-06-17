@@ -1,6 +1,6 @@
  <template>
     <div class="content container mt-3 travel_tour travel_tour-page" style="width:1100px;float:none">     
-		<router-link to="admin/addTour" class="btn btn-warning btn-rounded mb-4">
+		<router-link to="/addTour" class="btn btn-warning btn-rounded mb-4">
 			<i class="fa fa-plus" style="margin-right:5px;"/>Add tour
 		</router-link>
 		<div class="shortcode_title title-center title-decoration-bottom-center" style="margin-bottom:30px; margin-top:30px;">
