@@ -49,8 +49,8 @@
                     </div>
                 </div>  
                 <div class="md-form" style="text-align:center">                 
-                    <button type="submit" class="btn btn-warning btn-rounded mb-4">
-                        <i class="fa fa-upload" style="margin-right:5px;"/>Insert</button>
+                    <button type="submit" class="btn btn-primary btn-rounded mb-4">
+                        <i class="fa fa-save" style="margin-right:5px;"/>Save</button>
                 </div>
             </form>
     </div>
@@ -107,7 +107,8 @@
     //     // ...
     // });
 
-    var ids = [];
+    var selected_file_list=[]
+
     export default{
         name:'addTour',
         data(){
@@ -119,10 +120,8 @@
             type:'', 
             typeId: 0,
             typeName:'',
-            types:[],
-            selected_file_list:[]           
+            types:[]   
             }
-
         },   
         created () {
             db.collection('tourType').get().then((querySnapshot) => {                
@@ -134,7 +133,7 @@
                 this.types.push(data)
                 })
             });					
-        },	           
+        },
         methods:{
             generatePushID() {
                 // Modeled after base64 web-safe chars, but ordered by ASCII.
@@ -179,7 +178,8 @@
                 if(id.length != 20) throw new Error('Length should be 20.');
 
                 return id;
-            },        
+            },
+
             insert(){
                 var key=this.generatePushID();
                 debugger
@@ -190,43 +190,18 @@
                     Type:this.type                           
                 })
                 .then(function(event){
-                    debugger
                     // upload images then
-                    if(this.selected_file_list){
-                        for (var file in this.selected_file_list) {
-                            this.upload_image_firebase(key, file);
-                        }   
-                    }
                                
-                    this.$router.push('/adminDashboard')
+                    // this.$router.push('/adminDashboard')
                 })               
                 .catch(error => console.log(error))
-            },
-            // addImage(event){
-            //     $(document).on('click', '.fileBtn', function(e)
-            //     {
-            //         e.preventDefault();
-            //         var controlForm = $('.controls:first'),
-            //             currentEntry = $(this).parents('.entry:first'),
-            //             newEntry = $(currentEntry.clone()).appendTo(controlForm);
 
-            //         newEntry.find('input').val('');
-            //         controlForm.find('.entry:not(:last) .fileBtn')
-            //             .removeClass('fileBtn').addClass('cancelBtn')
-            //             .removeClass('cyan').addClass('orange')                         
-            //             .html('<i class="fa fa-minus pr-2" aria-hidden="true"></i>');
-            //     }).on('click', '.cancelBtn', function(e)
-            //     {
-            //         if($(this).parents('.entry'))
-            //             $(this).parents('.entry:first').remove();
-            //         else
-            //             $(this).removeClass('cancelBtn').addClass('fileBtn')
-            //                 .removeClass('orange').addClass('cyan')                         
-            //                 .html('<i class="fa fa-plus pr-2" aria-hidden="true"></i>');
-            //         e.preventDefault();
-            //         return false;
-            //     });
-            // },
+                if(selected_file_list){
+                    for (var i=0; i<selected_file_list.length; i++) {
+                        this.upload_image_firebase(key, selected_file_list[i])
+                    }   
+                }
+            },
             upload_image_firebase(foldername, file){
                 
                 // Get a reference to the storage service, which is used to create references in your storage bucket
@@ -281,17 +256,16 @@
                 });
             },
 
-            image_choosed(event){
-                var fileToLoad = event.target.files[0];
-                this.selected_file_list.push(fileToLoad)
-            },
-
             handleFileSelect(e) {
 
                 if(!e.target.files || !window.FileReader) return;
                 var selDiv = document.getElementById("selectedFiles");
                 selDiv.innerHTML = "";
                 
+                for(var i =0; i < e.target.files.length; i++){
+                    selected_file_list.push(e.target.files[i])
+                }
+
                 var filesArr = Array.prototype.slice.call(e.target.files);
                 filesArr.forEach(function(f) {
                     if(!f.type.match("image.*")) {
