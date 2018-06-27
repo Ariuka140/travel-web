@@ -34,12 +34,12 @@ export default new Router({
           component:Home          
         },
         {          
-          path:'/Tours',
+          path:'/tours',
           name:'Tours',
           component:Tours          
         },
         {          
-          path:'/:id',
+          path:'/tours/:id',
           name:'TourDetail',
           component:TourDetail          
         },
