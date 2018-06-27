@@ -182,7 +182,8 @@
 
             insert(){
                 var key=this.generatePushID();
-                debugger
+                const vm = this
+
                 db.collection('travel').doc(key).set({
                     Title: this.title,
                     Description:this.description,
@@ -191,16 +192,16 @@
                 })
                 .then(function(event){
                     // upload images then
-                               
+                    if(selected_file_list){
+                    for (var i=0; i<selected_file_list.length; i++) {
+                        vm.upload_image_firebase(key, selected_file_list[i])
+                    }   
+                }
                     // this.$router.push('/adminDashboard')
                 })               
                 .catch(error => console.log(error))
 
-                if(selected_file_list){
-                    for (var i=0; i<selected_file_list.length; i++) {
-                        this.upload_image_firebase(key, selected_file_list[i])
-                    }   
-                }
+                
             },
             upload_image_firebase(foldername, file){
                 

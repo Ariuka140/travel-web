@@ -7,7 +7,7 @@
                 </div>         
                 <div class="md-form mb-5">
                     <i class="fa fa-tag prefix grey-text"></i>
-                    <input type="text" id="form34" class="form-control validate" v-model="title" disabled required>
+                    <input type="text" id="form34" class="form-control validate" v-model="title" required>
                     <label for="form34" class="active">Title</label>
                 </div>
                 <div class="row">
@@ -114,17 +114,17 @@
         name:'editTour',
         data(){
             return{
-            package: [], 
-            ids:[],
-            id:'',          
-            title:'',
-            description:'',
-            duration:'',
-            type:'', 
-            typeId:0,
-            typeName:'',
-            types:[],
-            selectedFile:null           
+                package: [], 
+                ids:[],
+                id:'',          
+                title: "",
+                description:'',
+                duration:'',
+                type:'', 
+                typeId:0,
+                typeName:'',
+                types:[],
+                selectedFile:null           
             }
 
         }, 
@@ -136,40 +136,41 @@
                         'typeName' : doc.data().TypeName   
                     }               
                     this.types.push(data)         
-                })                
+                })     
             });
-            db.collection('travel').where('Id', '==', this.$route.params.id).get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {            
-                    this.id = doc.data().Id
-                    this.title = doc.data().Title
-                    this.description = doc.data().Description
-                    this.duration = doc.data().Duration  
-                    this.typeId = doc.data().Type   
-                })            
-                
-            }); 
+
+            const vm = this
+            
+            db.collection('travel').doc(this.$route.params.id).get()
+            .then(function(doc) {
+                if (doc.exists) {
+                    console.log("Document data:", doc.data())
+                    vm.title = doc.data().Title
+                    vm.description = doc.data().Description
+                    vm.duration = doc.data().Duration  
+                    vm.typeId = doc.data().Type
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
         },
         watch: {
         '$route': 'fetchData'
         },	           
         methods:{            
             update(){
-                db.collection('travel').where('Id', '==', this.$route.params.id).get().then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        doc.ref.update({
-                        Id: this.id,
-                        Title: this.title,
-                        Duration: this.duration,
-                        Description: this.description,
-                        Type: this.typeId
-                        })
-                        .then(() => {
-                            alert("success") 
-                            this.$router.push('/adminDashboard')
-                          
-                        });
-                    })
-                })            
+                db.collection('travel').doc(this.$route.params.id).set({
+                    Title: this.title,
+                    Duration: this.duration,
+                    Description: this.description,
+                    Type: this.typeId
+                }).then(() => {
+                    alert("success") 
+                    this.$router.push('/adminDashboard')
+                });        
             },                   
             addImage(event){
                 $(document).on('click', '.fileBtn', function(e)

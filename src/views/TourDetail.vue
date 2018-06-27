@@ -408,21 +408,30 @@ export default {
             duration:''          
             }        
         },    
-    created(){  
-        db.collection('travel').where('Id', '==', this.$route.params.id).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {            
-                this.id = doc.data().Id
-                this.title = doc.data().Title
-                this.description = doc.data().Description
-                this.duration = doc.data().Duration  
-                this.typeId = doc.data().Type   
-            })
-            db.collection('tourType').where('TypeId', '==', this.typeId).get().then((querySnapshot) => {               
-                querySnapshot.forEach((doc) => {                 
-                    this.typeName = doc.data().TypeName                 
-                })
+    created(){
+            const vm = this
+            
+            db.collection('travel').doc(this.$route.params.id).get()
+            .then(function(doc) {
+                if (doc.exists) {
+                    console.log("Document data:", doc.data())
+                    vm.title = doc.data().Title
+                    vm.description = doc.data().Description
+                    vm.duration = doc.data().Duration  
+                    vm.typeId = doc.data().Type
+                    db.collection('tourType').where('TypeId', '==', vm.typeId).get().then((querySnapshot) => {               
+                        querySnapshot.forEach((doc) => {                 
+                            vm.typeName = doc.data().TypeName                 
+                        })
+                    });
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
             });
-        }); 	
+        	
     },
     watch: {
     '$route': 'fetchData'

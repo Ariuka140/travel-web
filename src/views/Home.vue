@@ -121,9 +121,9 @@
 												<div class="item_content" >
 													<div class="post_images">
 														<router-link to="/admin/addPackage">
-														<span class="price">
+														<!-- <span class="price">
 															<span class="travel_tour-Price-amount amount">$89.00</span>
-														</span>
+														</span> -->
 															<img src="./../images/tour/430x305/tour-3.jpg" alt="" title="">
 														</router-link>
 														<div class="group-icon">
@@ -512,10 +512,10 @@
 			},
 			
 			created () {
-					db.collection('travel').get().then((querySnapshot) => {                
+					db.collection('travel').limit(8).get().then((querySnapshot) => {                
 							querySnapshot.forEach((doc) => {
 							const data = {
-									'id':doc.data().Id,
+									'id':doc.id,
 									'title': doc.data().Title,
 									'description': doc.data().Description,
 									'duration': doc.data().Duration                   

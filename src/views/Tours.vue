@@ -141,7 +141,7 @@
             db.collection('travel').get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     const data = {
-                        'id': doc.data().Id,                    
+                        'id': doc.id,                    
                         'title': doc.data().Title,
                         'description': doc.data().Description,
                         'duration': doc.data().Duration                   

@@ -88,7 +88,7 @@
 									'title': doc.data().Title,
 									'description': doc.data().Description,
 									'duration': doc.data().Duration,
-									 'id':doc.data().Id                  
+									 'id':doc.id                 
 							}
 							this.tours.push(data)
 							})
@@ -129,15 +129,16 @@
 						});
 				},
 				deleteTour (id) {
-        if(confirm ('Are you sure?')) {
-          db.collection('travel').where('Id', '==', id).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              doc.ref.delete();
-              this.$router.push('/adminDashboard')
-            })
-          })
-        }
-      }
+					if(confirm ('Are you sure?')) {
+						debugger
+						db.collection('travel').doc(id).delete().then(function() {
+							console.log("Document successfully deleted!");
+							// this.$router.push('/adminDashboard')
+						}).catch(function(error) {
+							console.error("Error removing document: ", error);
+						});
+					}
+      			}
 			}		
 		}
 </script>
