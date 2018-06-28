@@ -1,6 +1,6 @@
  <template>
     <div class="content container mt-3 travel_tour travel_tour-page" style="width:1100px;float:none">     
-		<router-link to="/addTour" class="btn btn-warning btn-rounded mb-4">
+		<router-link to="/admin/addTour" class="btn btn-warning btn-rounded mb-4">
 			<i class="fa fa-plus" style="margin-right:5px;"/>Add tour
 		</router-link>
 		<div class="shortcode_title title-center title-decoration-bottom-center" style="margin-bottom:30px; margin-top:30px;">
@@ -69,7 +69,9 @@
 	import counter from './../assets/js/jquery.counterup.min.js'
 	import theme from './../assets/js/theme.js'
 	import Vue from 'vue'
-	import db from './../components/firebaseInit'		
+	import db from './../components/firebaseInit'
+	import firebase from 'firebase'
+
 	export default {
 			name:'adminDashboard',      
 			data () {
@@ -130,15 +132,30 @@
 				},
 				deleteTour (id) {
 					if(confirm ('Are you sure?')) {
-						debugger
+						const vm = this
+
 						db.collection('travel').doc(id).delete().then(function() {
 							console.log("Document successfully deleted!");
-							// this.$router.push('/adminDashboard')
+							// vm.delete_firebase_images(id)
+							
 						}).catch(function(error) {
 							console.error("Error removing document: ", error);
 						});
 					}
-      			}
+				},
+				delete_firebase_images(foldername){
+					const vm = this
+
+					// Get a reference to the storage service, which is used to create references in your storage bucket
+					var storage = firebase.storage()
+
+					// Create a storage reference from our storage service
+					var storageRef = storage.ref()
+					storageRef.child(foldername).delete().then(function(){
+						vm.$router.push('/admin')
+						alert("SUCCESS DELETE!")
+					})
+				}
 			}		
 		}
 </script>

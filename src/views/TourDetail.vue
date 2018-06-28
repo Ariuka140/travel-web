@@ -54,44 +54,20 @@
                                 <div id="slider" class="flexslider">
                                     <ul class="slides">
                                         <li>
-                                            <a href="images/tour/tour-1.jpg" class="swipebox" title=""><img width="950" height="700" src="images/tour/tour-1.jpg" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="" draggable="false"></a>
+                                            <a href="https://firebasestorage.googleapis.com/v0/b/testproject-a001.appspot.com/o/-LG5Df0k6er3E8FB_i-A%2F2.jpg?alt=media&token=0806d51e-1d44-41f6-8f5e-35ef9a001e3b" class="swipebox" title=""><img width="950" height="700" src="images/tour/tour-1.jpg" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="" draggable="false"></a>
                                         </li>
                                         <li>
-                                            <a href="images/tour/tour-2.jpg" class="swipebox" title=""><img width="950" height="700" src="images/tour/tour-2.jpg" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="" draggable="false"></a>
-                                        </li>
-                                        <li>
-                                            <a href="images/tour/tour-3.jpg" class="swipebox" title=""><img width="950" height="700" src="images/tour/tour-3.jpg" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="" draggable="false"></a>
-                                        </li>
-                                        <li>
-                                            <a href="images/tour/tour-4.jpg" class="swipebox" title=""><img width="950" height="700" src="images/tour/tour-4.jpg" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="" draggable="false"></a>
-                                        </li>
-                                        <li>
-                                            <a href="images/tour/tour-5.jpg" class="swipebox" title=""><img width="950" height="700" src="images/tour/tour-5.jpg" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="" draggable="false"></a>
-                                        </li>
-                                        <li>
-                                            <a href="images/tour/tour-6.jpg" class="swipebox" title=""><img width="950" height="700" src="images/tour/tour-6.jpg" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="" draggable="false"></a>
+                                            <a href="https://firebasestorage.googleapis.com/v0/b/testproject-a001.appspot.com/o/-LG5Df0k6er3E8FB_i-A%2F2.jpg?alt=media&token=0806d51e-1d44-41f6-8f5e-35ef9a001e3b" class="swipebox" title=""><img width="950" height="700" src="images/tour/tour-2.jpg" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="" draggable="false"></a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div id="carousel" class="flexslider thumbnail_product">
                                     <ul class="slides">
                                         <li>
-                                            <img width="150" height="100" src="images/tour/tour-1.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="" draggable="false">
+                                            <img width="150" height="100" src="https://firebasestorage.googleapis.com/v0/b/testproject-a001.appspot.com/o/-LG5Df0k6er3E8FB_i-A%2F2.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="" draggable="false">
                                         </li>
                                         <li>
-                                            <img width="150" height="100" src="images/tour/tour-2.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="" draggable="false">
-                                        </li>
-                                        <li>
-                                            <img width="150" height="100" src="images/tour/tour-3.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="" draggable="false">
-                                        </li>
-                                        <li>
-                                            <img width="150" height="100" src="images/tour/tour-4.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="" draggable="false">
-                                        </li>
-                                        <li>
-                                            <img width="150" height="100" src="images/tour/tour-5.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="" draggable="false">
-                                        </li>
-                                        <li>
-                                            <img width="150" height="100" src="images/tour/tour-6.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="" draggable="false">
+                                            <img width="150" height="100" src="https://firebasestorage.googleapis.com/v0/b/testproject-a001.appspot.com/o/-LG5Df0k6er3E8FB_i-A%2F2.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="" draggable="false">
                                         </li>
                                     </ul>
                                 </div>

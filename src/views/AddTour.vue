@@ -193,15 +193,13 @@
                 .then(function(event){
                     // upload images then
                     if(selected_file_list){
-                    for (var i=0; i<selected_file_list.length; i++) {
-                        vm.upload_image_firebase(key, selected_file_list[i])
-                    }   
-                }
-                    // this.$router.push('/adminDashboard')
+                        for (var i=0; i<selected_file_list.length; i++) {
+                            vm.upload_image_firebase(key, selected_file_list[i])
+                        }
+                    }
+                    vm.$router.push('/admin/adminDashboard')
                 })               
                 .catch(error => console.log(error))
-
-                
             },
             upload_image_firebase(foldername, file){
                 
@@ -213,7 +211,7 @@
 
                 // Create the file metadata
                 var metadata = {
-                contentType: 'image/jpeg'
+                    contentType: 'image/*'
                 };
 
                 // Upload file and metadata to the object 'images/mountains.jpg'

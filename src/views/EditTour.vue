@@ -162,6 +162,8 @@
         },	           
         methods:{            
             update(){
+                const vm = this
+
                 db.collection('travel').doc(this.$route.params.id).set({
                     Title: this.title,
                     Duration: this.duration,
@@ -169,35 +171,9 @@
                     Type: this.typeId
                 }).then(() => {
                     alert("success") 
-                    this.$router.push('/adminDashboard')
+                    vm.$router.push('/adminDashboard')
                 });        
-            },                   
-            addImage(event){
-                $(document).on('click', '.fileBtn', function(e)
-                {
-                    e.preventDefault();
-                    var controlForm = $('.controls:first'),
-                        currentEntry = $(this).parents('.entry:first'),
-                        newEntry = $(currentEntry.clone()).appendTo(controlForm);
-
-                    newEntry.find('input').val('');
-                    controlForm.find('.entry:not(:last) .fileBtn')
-                        .removeClass('fileBtn').addClass('cancelBtn')
-                        .removeClass('cyan').addClass('orange')                         
-                        .html('<i class="fa fa-minus pr-2" aria-hidden="true"></i>');
-                        debugger;
-                }).on('click', '.cancelBtn', function(e)
-                {
-                    if($(this).parents('.entry'))
-                        $(this).parents('.entry:first').remove();
-                    else
-                        $(this).removeClass('cancelBtn').addClass('fileBtn')
-                               .removeClass('orange').addClass('cyan')                         
-                               .html('<i class="fa fa-plus pr-2" aria-hidden="true"></i>');
-                    e.preventDefault();
-                    return false;
-                });
-            },              
+            },        
             detectFiles(event){
                 this.selectedFile=event.target.file[0];                 
             }              
