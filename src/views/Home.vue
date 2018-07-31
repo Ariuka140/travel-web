@@ -272,48 +272,6 @@
 									<div class="post_list_content_unit col-sm-6">
 										<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FMaranathaTourMongolia%2Fposts%2F2063980017177502&width=500" width="500" height="430" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 									</div>
-	                <!-- <div class="post_list_content_unit col-sm-6">
-	                  <div class="feature-image">
-	                    <a href="#" class="entry-thumbnail">
-	                      <img width="370" height="260" src="./../images/blog/201H.jpg" alt="">
-	                    </a>
-	                  </div>
-	                  <div class="post-list-content">
-	                    <div class="post_list_inner_content_unit">
-	                      <h3 class="post_list_title">
-	                        <a href="single.html" rel="bookmark">Love advice from experts</a>
-	                      </h3>
-	                      <div class="wrapper-meta">
-	                        <div class="date-time">September 6, 2016</div>
-	                        <div class="post_list_cats">
-	                          <a href="#" rel="category tag">Technology</a>
-	                        </div>
-	                      </div>
-	                      <div class="post_list_item_excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam efficitur</div>
-	                    </div>
-	                  </div>
-	                </div> -->
-	                <!-- <div class="post_list_content_unit col-sm-6">
-	                  <div class="feature-image">
-	                    <a href="#" class="entry-thumbnail">
-	                      <img width="370" height="260" src="./../images/blog/86H.jpg" alt="">
-	                    </a>
-	                  </div>
-	                  <div class="post-list-content">
-	                    <div class="post_list_inner_content_unit">
-	                      <h3 class="post_list_title">
-	                        <a href="single.html" rel="bookmark">The perfect summer body</a>
-	                      </h3>
-	                      <div class="wrapper-meta">
-	                        <div class="date-time">September 6, 2016</div>
-	                        <div class="post_list_cats">
-	                          <a href="#" rel="category tag">Technology</a>
-	                        </div>
-	                      </div>
-	                      <div class="post_list_item_excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam efficitur</div>
-	                    </div>
-	                  </div>
-	                </div> -->
 	              </div>
 	            </div>
 	          </div>

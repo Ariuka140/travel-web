@@ -400,8 +400,6 @@
 </template>
 <script>
 
-// import jssor from './../assets/js/jssor.slider-27.4.0.min.js'
-// import vendor from './../assets/js/vendors.js'
 import light from './../assets/js/lightslider.js'
 
 import db from './../components/firebaseInit'	
