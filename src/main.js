@@ -12,8 +12,6 @@ require('./assets/css/font-linearicons.css')
 require('./style.css')
 require('./assets/css/myStyle.css')
 require('./assets/css/travel-setting.css')
-
-// require('./assets/css/jssor.css')
 require('./assets/css/lightslider.css')
 
 require('./assets/scss/style.scss')
