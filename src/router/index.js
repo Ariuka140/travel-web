@@ -6,6 +6,7 @@ import full from './../containers/Full'
 
 import MainTemplate from './../containers/MainTemplate'
 import Home from './../views/Home'
+import Home2 from './../views/Home2'
 import Tours from './../views/Tours'
 import TourDetail from './../views/TourDetail'
 import addTour from './../views/AddTour'
@@ -22,6 +23,11 @@ export default new Router({
   linkActiveClass: 'open active',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
+    {          
+      path:'/home2',
+      name:'Home2',
+      component:Home2       
+    },
     {
       path: '/',      
       name: 'MainTemplate',
@@ -74,5 +80,4 @@ export default new Router({
       ]
     }
     ]
-    
 });

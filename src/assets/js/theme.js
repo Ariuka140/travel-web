@@ -55,7 +55,7 @@
 var custom_js = {
 	init            : function () {
 		// image top header
-		$('#masthead').imagesLoaded(function () {
+		jQuery('#masthead').imagesLoaded(function () {
 			var navigation_menu = jQuery('#masthead').outerHeight(true),
 				header_top_bar = jQuery('.affix .header_top_bar').outerHeight(true),
 				header_top_bar_hiden = 0;
@@ -230,12 +230,12 @@ var custom_js = {
 jQuery(window).load(function () {
 	custom_js.init();
 	custom_js.search();
-	setTimeout(custom_js.generateCarousel(),10000);
+	custom_js.generateCarousel();
 	custom_js.singleSlider();
 	custom_js.stickyHeaderInit();
 });
 jQuery(window).ready(function () {
-	
+	custom_js.generateCarousel();
 });
 /* ---------------------------------------------
  Scripts resize
