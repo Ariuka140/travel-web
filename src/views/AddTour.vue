@@ -22,7 +22,7 @@
                <div class="md-form mb-5">
                     <i class="fa fa-tag prefix grey-text"></i>
                     <select class="form-control validate" id="type" v-model="type">     
-                        <option v-for="type in types" v-bind:value="type.typeId">{{type.typeName}}</option>                 
+                        <option v-for="type in types" v-bind:value="type.typeId" v-bind:key="type.typeId">{{type.typeName}}</option>                 
                     </select>  
                       <label for="type" class="active">Type</label>               
                 </div>
@@ -120,7 +120,8 @@
             type:'', 
             typeId: 0,
             typeName:'',
-            types:[]   
+            types:[],
+            image_paths:[]
             }
         },   
         created () {
@@ -181,28 +182,40 @@
             },
 
             insert(){
-                var key=this.generatePushID();
                 const vm = this
+                var key=this.generatePushID();
+                // upload images then
+                if(selected_file_list){
+                    for (var i=0; i<selected_file_list.length; i++) {
+                        vm.upload_image_firebase(key, selected_file_list[i], i, selected_file_list.length);
+                    }
+                }
+            },
 
+            save_to_db(key){
+                
+                const vm = this
+                let path_string = ''
+                vm.image_paths.forEach(function(path){
+                    console.log(path)
+                    path_string += path + ';'
+                });
+                
                 db.collection('travel').doc(key).set({
-                    Title: this.title,
-                    Description:this.description,
-                    Duration:this.duration,
-                    Type:this.type                           
+                    title: this.title,
+                    description: this.description,
+                    duration: this.duration,
+                    type: this.type,
+                    paths: path_string,                    
                 })
                 .then(function(event){
-                    // upload images then
-                    if(selected_file_list){
-                        for (var i=0; i<selected_file_list.length; i++) {
-                            vm.upload_image_firebase(key, selected_file_list[i])
-                        }
-                    }
                     vm.$router.push('/admin/adminDashboard')
                 })               
                 .catch(error => console.log(error))
             },
-            upload_image_firebase(foldername, file){
-                
+
+            upload_image_firebase(foldername, file, index, total){
+                const vm = this
                 // Get a reference to the storage service, which is used to create references in your storage bucket
                 var storage = firebase.storage();
 
@@ -251,6 +264,11 @@
                     // Upload completed successfully, now we can get the download URL
                     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
                         console.log('File available at', downloadURL);
+                        vm.image_paths.push(downloadURL)
+                        // when all file uploaded.
+                        if(index == total - 1){
+                            vm.save_to_db(foldername)
+                        }
                     });
                 });
             },

@@ -13,8 +13,7 @@
 									<div class="item_border item-product">
 								<div class="post_images">
 									<a href="single-tour.html">
-										<span class="price">$64.00</span>
-										<img width="430" height="305" src="images/tour/430x305/tour-3.jpg" alt="Discover Brazil" title="Discover Brazil">
+										<img style="width:430px; height:205px;" v-bind:src="tour.path" v-bind:title="tour.title">
 									</a>
 									<div class="group-icon">
 										<router-link v-bind:to="{ name: 'editTour', params: { id: tour.id }}"    data-toggle="tooltip" title="Edit" data-placement="top" class="frist" data-original-title="Escorted Tour"><i class="fa fa-pencil"></i></router-link>
@@ -87,10 +86,11 @@
 					db.collection('travel').get().then((querySnapshot) => {                
 							querySnapshot.forEach((doc) => {
 							const data = {
-									'title': doc.data().Title,
-									'description': doc.data().Description,
-									'duration': doc.data().Duration,
-									 'id':doc.id                 
+								'title': doc.data().title,
+								'description': doc.data().description,
+								'duration': doc.data().duration,
+								'id':doc.id,     
+								'path': String(doc.data().paths).split(';')[0]
 							}
 							this.tours.push(data)
 							})
@@ -154,7 +154,17 @@
 					storageRef.child(foldername).delete().then(function(){
 						vm.$router.push('/admin')
 						alert("SUCCESS DELETE!")
+						// // Create a reference to the file to delete
+						// var desertRef = storageRef.child('images/desert.jpg');
+
+						// // Delete the file
+						// desertRef.delete().then(function() {
+						// // File deleted successfully
+						// }).catch(function(error) {
+						// // Uh-oh, an error occurred!
+						// });
 					})
+
 				}
 			}		
 		}

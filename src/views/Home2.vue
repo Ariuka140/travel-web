@@ -217,10 +217,7 @@
 												<div class="item_content" >
 													<div class="post_images">
 														<router-link to="/admin/addPackage">
-														<!-- <span class="price">
-															<span class="travel_tour-Price-amount amount">$89.00</span>
-														</span> -->
-															<img src="./../images/tour/430x305/tour-3.jpg" alt="" title="">
+															<img width="auto" style="height:200px" v-bind:src="travel.path" v-bind:alt="travel.title" v-bind:title="travel.title">
 														</router-link>
 														<div class="group-icon">
 															<a href="#" data-toggle="tooltip" data-placement="top" title="" class="frist" data-original-title="River Cruise"><i class="flaticon-transport-2"></i></a>
@@ -601,9 +598,10 @@
 							querySnapshot.forEach((doc) => {
 							const data = {
 									'id':doc.id,
-									'title': doc.data().Title,
-									'description': doc.data().Description,
-									'duration': doc.data().Duration                   
+									'title': doc.data().title,
+									'description': doc.data().description,
+									'duration': doc.data().duration,
+									'path': String(doc.data().paths).split(';')[0],                
 							}
 							this.travels.push(data)
 							})

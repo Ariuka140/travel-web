@@ -26,7 +26,7 @@
 	                  <div class="hb-form-field-input hb_input_field">
 	                    <select name="tourtax[tour_phys]" v-model="typeSearch">
 	                      <option value="0">Tour Type</option>
-	                      <option v-for="tp in types" v-bind:value="tp.typeId">{{tp.typeName}}</option> 
+	                      <option v-for="tp in types" v-bind:value="tp.typeId" v-bind:key="tp.typeId">{{tp.typeName}}</option> 
 	                    </select>
 	                  </div>
 	                </li>	               

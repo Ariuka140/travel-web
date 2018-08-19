@@ -53,59 +53,34 @@
                                 </div>
                                 <!-- slider -->
                                 <div id="slider" class="slider">
-                                    <input type="radio" name="slide_switch" id="id1"/>
+                                    <!-- <input type="radio" name="slide_switch" v-bind:id="-1"/>
+                                    <label for="id1">
+                                        <img v-bind:src="paths[0]" style="width:100px"/>
+                                    </label>
+                                    <img v-bind:src="paths[0]"/>
+                                    
+                                    
+                                    <div v-for="(path, index) in paths" v-bind:key="index">
+                                        <!-- Lets show the second image by default on page load
+                                        <input type="radio" name="slide_switch" id="index"/>
+                                        <label for="id2">
+                                            <img v-bind:src="path" style= "width:100px"/>
+                                        </label>
+                                        <img v-bind:src="path"/> -->
+                                    <input type="radio" name="slide_switch" id="id1" checked="checked"/>
                                     <label for="id1">
                                         <img src="http://thecodeplayer.com/uploads/media/3yiC6Yq.jpg" width="100"/>
                                     </label>
                                     <img src="http://thecodeplayer.com/uploads/media/3yiC6Yq.jpg"/>
                                     
                                     <!--Lets show the second image by default on page load-->
-                                    <input type="radio" name="slide_switch" id="id2" checked="checked"/>
+                                    <input type="radio" name="slide_switch" id="id2" />
                                     <label for="id2">
                                         <img src="http://thecodeplayer.com/uploads/media/40Ly3VB.jpg" width="100"/>
                                     </label>
                                     <img src="http://thecodeplayer.com/uploads/media/40Ly3VB.jpg"/>
-                                    
-                                    <input type="radio" name="slide_switch" id="id3"/>
-                                    <label for="id3">
-                                        <img src="http://thecodeplayer.com/uploads/media/00kih8g.jpg" width="100"/>
-                                    </label>
-                                    <img src="http://thecodeplayer.com/uploads/media/00kih8g.jpg"/>
-                                    
-                                    <input type="radio" name="slide_switch" id="id4"/>
-                                    <label for="id4">
-                                        <img src="http://thecodeplayer.com/uploads/media/2rT2vdx.jpg" width="100"/>
-                                    </label>
-                                    <img src="http://thecodeplayer.com/uploads/media/2rT2vdx.jpg"/>
-                                    
-                                    <input type="radio" name="slide_switch" id="id5"/>
-                                    <label for="id5">
-                                        <img src="http://thecodeplayer.com/uploads/media/8k3N3EL.jpg" width="100"/>
-                                    </label>
-                                    <img src="http://thecodeplayer.com/uploads/media/8k3N3EL.jpg"/>
                                 </div>
-                                <!-- <div id="slider" class="flexslider">
-                                    <ul class="slides">
-                                        <li>
-                                            <a href="http://travel-team.info/uploads/blog/brooklyn_bridge_usa-wallpaper-1440x900-1024x640.jpg" class="swipebox" title="">
-                                            <img width="950" height="700" src="http://travel-team.info/uploads/blog/brooklyn_bridge_usa-wallpaper-1440x900-1024x640.jpg" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="" draggable="false"></a>
-                                        </li>
-                                        <li>
-                                            <a href="http://travel-team.info/uploads/blog/brooklyn_bridge_usa-wallpaper-1440x900-1024x640.jpg" class="swipebox" title="">
-                                            <img width="950" height="700" src="http://travel-team.info/uploads/blog/brooklyn_bridge_usa-wallpaper-1440x900-1024x640.jpg" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="" draggable="false"></a>
-                                        </li>
-                                    </ul>
-                                </div> -->
-                                <div id="carousel" class="flexslider thumbnail_product">
-                                    <ul class="slides">
-                                        <li>
-                                            <img width="150" height="100" src="http://travel-team.info/uploads/blog/brooklyn_bridge_usa-wallpaper-1440x900-1024x640.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="" draggable="false">
-                                        </li>
-                                        <li>
-                                            <img width="150" height="100" src="http://travel-team.info/uploads/blog/brooklyn_bridge_usa-wallpaper-1440x900-1024x640.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="" draggable="false">
-                                        </li>
-                                    </ul>
-                                </div>
+                                
                                 <div class="clear"></div>
                                 <div class="single-tour-tabs wc-tabs-wrapper">
                                     <ul class="tabs wc-tabs" role="tablist">
@@ -413,7 +388,8 @@ export default {
             typeName:'',
             id:'',            
             description:'',
-            duration:''          
+            duration:'',
+            paths: []       
             }        
         },    
     created(){
@@ -423,10 +399,11 @@ export default {
             .then(function(doc) {
                 if (doc.exists) {
                     console.log("Document data:", doc.data())
-                    vm.title = doc.data().Title
-                    vm.description = doc.data().Description
-                    vm.duration = doc.data().Duration  
-                    vm.typeId = doc.data().Type
+                    vm.title = doc.data().title
+                    vm.description = doc.data().description
+                    vm.duration = doc.data().duration  
+                    vm.typeId = doc.data().type
+                    vm.paths = String(doc.data().paths).split(';')
                     db.collection('tourType').where('TypeId', '==', vm.typeId).get().then((querySnapshot) => {               
                         querySnapshot.forEach((doc) => {                 
                             vm.typeName = doc.data().TypeName                 
